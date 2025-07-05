@@ -1,0 +1,22 @@
+{
+  "testimonials": [
+    {
+      "name": "María González",
+      "text": "Memorias de Vida capturó perfectamente la esencia de nuestra boda. Las fotos son simplemente mágicas y nos transportan a ese día especial cada vez que las vemos.",
+      "rating": 5,
+      "role": "Cliente Satisfecho"
+    },
+    {
+      "name": "Carlos Rodríguez",
+      "text": "La sesión familiar fue increíble. El fotógrafo supo captar la personalidad de cada uno de nosotros y crear un ambiente relajado y divertido.",
+      "rating": 5,
+      "role": "Cliente Satisfecho"
+    },
+    {
+      "name": "Ana Martínez",
+      "text": "Profesionalismo excepcional y resultados que superaron nuestras expectativas. Definitivamente recomendaría sus servicios a cualquiera.",
+      "rating": 5,
+      "role": "Cliente Satisfecho"
+    }
+  ]
+}

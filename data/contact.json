@@ -1,0 +1,39 @@
+{
+  "contactInfo": [
+    {
+      "type": "phone",
+      "icon": "Phone",
+      "label": "Teléfono",
+      "value": "+1 (555) 123-4567"
+    },
+    {
+      "type": "email",
+      "icon": "Mail",
+      "label": "Email",
+      "value": "info@memoriasdevida.com"
+    },
+    {
+      "type": "address",
+      "icon": "MapPin",
+      "label": "Ubicación",
+      "value": "123 Calle Principal, Ciudad"
+    }
+  ],
+  "socialMedia": [
+    {
+      "platform": "Instagram",
+      "icon": "Instagram",
+      "href": "#"
+    },
+    {
+      "platform": "Facebook",
+      "icon": "Facebook",
+      "href": "#"
+    },
+    {
+      "platform": "Twitter",
+      "icon": "Twitter",
+      "href": "#"
+    }
+  ]
+}

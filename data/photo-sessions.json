@@ -1,0 +1,124 @@
+{
+  "sessions": [
+    {
+      "id": "session-001",
+      "clientName": "Familia González",
+      "sessionType": "Retrato Familiar",
+      "date": "2024-03-15",
+      "photographer": "Ana Martínez",
+      "location": "Parque Central",
+      "totalPhotos": 45,
+      "deliveryDate": "2024-03-22",
+      "photos": [
+        {
+          "id": "photo-001",
+          "filename": "familia-gonzalez-001.jpg",
+          "src": "/placeholder.svg?height=800&width=600",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Retrato familiar en el parque",
+          "caption": "Momento especial en familia",
+          "tags": ["familia", "exterior", "sonrisas"]
+        },
+        {
+          "id": "photo-002",
+          "filename": "familia-gonzalez-002.jpg",
+          "src": "/placeholder.svg?height=600&width=800",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Niños jugando en el parque",
+          "caption": "La alegría de los pequeños",
+          "tags": ["niños", "juego", "natural"]
+        },
+        {
+          "id": "photo-003",
+          "filename": "familia-gonzalez-003.jpg",
+          "src": "/placeholder.svg?height=800&width=600",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Pareja abrazándose",
+          "caption": "Amor verdadero",
+          "tags": ["pareja", "amor", "abrazo"]
+        },
+        {
+          "id": "photo-004",
+          "filename": "familia-gonzalez-004.jpg",
+          "src": "/placeholder.svg?height=600&width=800",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Retrato grupal familiar",
+          "caption": "Todos juntos",
+          "tags": ["grupo", "familia", "formal"]
+        },
+        {
+          "id": "photo-005",
+          "filename": "familia-gonzalez-005.jpg",
+          "src": "/placeholder.svg?height=800&width=600",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Detalle de manos entrelazadas",
+          "caption": "Conexión especial",
+          "tags": ["detalle", "manos", "conexión"]
+        },
+        {
+          "id": "photo-006",
+          "filename": "familia-gonzalez-006.jpg",
+          "src": "/placeholder.svg?height=600&width=800",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Niña con flores",
+          "caption": "Inocencia y belleza",
+          "tags": ["niña", "flores", "retrato"]
+        },
+        {
+          "id": "photo-007",
+          "filename": "familia-gonzalez-007.jpg",
+          "src": "/placeholder.svg?height=800&width=600",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Familia caminando",
+          "caption": "Juntos hacia el futuro",
+          "tags": ["caminar", "familia", "movimiento"]
+        },
+        {
+          "id": "photo-008",
+          "filename": "familia-gonzalez-008.jpg",
+          "src": "/placeholder.svg?height=600&width=800",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Risas familiares",
+          "caption": "Momentos de alegría",
+          "tags": ["risas", "alegría", "espontáneo"]
+        },
+        {
+          "id": "photo-009",
+          "filename": "familia-gonzalez-009.jpg",
+          "src": "/placeholder.svg?height=800&width=600",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Atardecer familiar",
+          "caption": "Luz dorada del atardecer",
+          "tags": ["atardecer", "luz", "dorado"]
+        },
+        {
+          "id": "photo-010",
+          "filename": "familia-gonzalez-010.jpg",
+          "src": "/placeholder.svg?height=600&width=800",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Abrazo grupal",
+          "caption": "El amor de una familia",
+          "tags": ["abrazo", "amor", "unión"]
+        },
+        {
+          "id": "photo-011",
+          "filename": "familia-gonzalez-011.jpg",
+          "src": "/placeholder.svg?height=800&width=600",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Retrato individual padre",
+          "caption": "Fortaleza y ternura",
+          "tags": ["padre", "retrato", "individual"]
+        },
+        {
+          "id": "photo-012",
+          "filename": "familia-gonzalez-012.jpg",
+          "src": "/placeholder.svg?height=600&width=800",
+          "thumbnail": "/placeholder.svg?height=300&width=400",
+          "alt": "Retrato individual madre",
+          "caption": "Elegancia natural",
+          "tags": ["madre", "retrato", "elegancia"]
+        }
+      ]
+    }
+  ]
+}
