@@ -114,11 +114,21 @@ export default function PaquetesPage() {
                   })}
                 </div>
                 <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark mb-4">{packageData.name}</h2>
-                <p className="text-xl text-slate-600 max-w-2xl mx-auto">{packageData.description}</p>
+                {packageData.description && (
+                  <p className="text-xl text-slate-600 max-w-2xl mx-auto">{packageData.description}</p>
+                )}
               </div>
 
               {/* Tiers Grid */}
-              <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              <div
+                className={`grid gap-8 max-w-7xl mx-auto ${
+                  packageData.tiers.length === 1
+                    ? "lg:grid-cols-1 max-w-md"
+                    : packageData.tiers.length === 2
+                      ? "lg:grid-cols-2 max-w-4xl"
+                      : "lg:grid-cols-3"
+                }`}
+              >
                 {packageData.tiers.map((tier, tierIndex) => (
                   <Card
                     key={tierIndex}

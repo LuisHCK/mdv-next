@@ -220,6 +220,153 @@
           "popular": false
         }
       ]
+    },
+    {
+      "name": "Perfil Profesional",
+      "description": "",
+      "icon": "Camera",
+      "color": "rose",
+      "tiers": [
+        {
+          "name": "Paquete Único",
+          "price": "$60",
+          "duration": "2:30 horas",
+          "photos": "8 fotografías digitales",
+          "features": [
+            "1 Fotografía impresa (8x10)",
+            "Solo participa una persona",
+            "Cambios de ropa sin límite",
+            "Sesión en estudio",
+            "Snack durante la sesión",
+            "Acompañante adicional $5",
+            "Fotografía extra $2 por foto"
+          ],
+          "delivery": "10 días hábiles",
+          "popular": false
+        }
+      ]
+    },
+    {
+      "name": "Paquete Aire Libre",
+      "description": "Picnic, casuales, tus 15, otros",
+      "icon": "Users",
+      "color": "amber",
+      "tiers": [
+        {
+          "name": "Paquete Único",
+          "price": "$60",
+          "duration": "2 horas",
+          "photos": "8 fotografías digitales",
+          "features": [
+            "1 a 2 personas máximo",
+            "Varios cambios de ropa",
+            "Sesión al aire libre",
+            "Acompañante adicional $5",
+            "Fotografía extra $5 por foto"
+          ],
+          "delivery": "6 días hábiles",
+          "popular": true
+        }
+      ]
+    },
+    {
+      "name": "Para el Recuerdo",
+      "description": "Casuales/Elegantes",
+      "icon": "Heart",
+      "color": "emerald",
+      "tiers": [
+        {
+          "name": "Paquete Único",
+          "price": "$30",
+          "duration": "2 horas",
+          "photos": "5 fotografías digitales",
+          "features": [
+            "1 a 2 personas máximo",
+            "2 cambios de ropa",
+            "Sesión en estudio",
+            "Acompañante adicional $5",
+            "Fotografía extra $2 por foto"
+          ],
+          "delivery": "6 días hábiles",
+          "popular": false
+        }
+      ]
+    },
+    {
+      "name": "Infantil",
+      "description": "",
+      "icon": "Sparkles",
+      "color": "purple",
+      "tiers": [
+        {
+          "name": "Paquete 1",
+          "price": "$30",
+          "duration": "1 hora",
+          "photos": "5 fotografías digitales",
+          "features": [
+            "Solo participa un niño",
+            "1 cambio de ropa",
+            "Sesión en estudio",
+            "Acompañante adicional $5",
+            "Fotografía extra $2 por foto"
+          ],
+          "delivery": "4 días hábiles",
+          "popular": false
+        },
+        {
+          "name": "Paquete 2",
+          "price": "$40",
+          "duration": "1:30 horas",
+          "photos": "8 fotografías digitales",
+          "features": [
+            "Solo participa un niño",
+            "2 cambios de ropa",
+            "Sesión en estudio",
+            "Acompañante adicional incluido",
+            "Fotografía extra $2 por foto"
+          ],
+          "delivery": "6 días hábiles",
+          "popular": true
+        }
+      ]
+    },
+    {
+      "name": "Celebrate/Cumpleaños",
+      "description": "",
+      "icon": "Crown",
+      "color": "rose",
+      "tiers": [
+        {
+          "name": "Paquete 1",
+          "price": "$20",
+          "duration": "1 hora",
+          "photos": "5 fotografías digitales",
+          "features": [
+            "Solo participa el cumpleañero(a)",
+            "1 cambio de ropa",
+            "Sesión en estudio",
+            "Acompañante adicional $5",
+            "Fotografía extra $2 por foto"
+          ],
+          "delivery": "7 días hábiles",
+          "popular": false
+        },
+        {
+          "name": "Paquete 2",
+          "price": "$30",
+          "duration": "1:30 horas",
+          "photos": "8 fotografías digitales",
+          "features": [
+            "Solo participa el cumpleañero(a)",
+            "2 cambios de ropa",
+            "Sesión en estudio",
+            "Acompañante adicional $5",
+            "Fotografía extra $2 por foto"
+          ],
+          "delivery": "7 días hábiles",
+          "popular": true
+        }
+      ]
     }
   ],
   "cta": {
