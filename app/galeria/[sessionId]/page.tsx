@@ -13,6 +13,7 @@ import { useParams } from "next/navigation"
 // Import data
 import photoSessionsData from "@/data/photo-sessions.json"
 import siteContent from "@/data/site-content.json"
+import Header from "@/components/header"
 
 export default function GaleriaPage() {
   const params = useParams()
@@ -76,37 +77,7 @@ export default function GaleriaPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-secondary via-white to-brand-secondary">
-      {/* Header */}
-      <header className="sticky top-0 w-full bg-white/90 backdrop-blur-md border-b border-brand-primary/20 z-40">
-        <div className="container mx-auto px-4 lg:px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Camera className="h-8 w-8 text-brand-primary" />
-            <span className="text-2xl font-serif font-bold text-brand-dark">{siteContent.brand.name}</span>
-          </Link>
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setViewMode(viewMode === "grid" ? "list" : "grid")}
-              className="text-slate-700 hover:text-brand-primary"
-            >
-              {viewMode === "grid" ? <List className="h-5 w-5" /> : <Grid3X3 className="h-5 w-5" />}
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white bg-transparent"
-            >
-              <Share2 className="h-4 w-4 mr-2" />
-              Compartir
-            </Button>
-            <Button size="sm" className="bg-brand-primary hover:bg-brand-primary/90 text-white">
-              <Download className="h-4 w-4 mr-2" />
-              Descargar Todo
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header siteContent={siteContent} />
 
       {/* Session Info */}
       <section className="py-8 bg-white border-b border-slate-100">

@@ -7,30 +7,13 @@ import Link from "next/link"
 // Import data
 import photoSessionsData from "@/data/photo-sessions.json"
 import siteContent from "@/data/site-content.json"
+import Header from "@/components/header"
 
 export default function GaleriaIndexPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-secondary via-white to-brand-secondary">
       {/* Header */}
-      <header className="sticky top-0 w-full bg-white/90 backdrop-blur-md border-b border-brand-primary/20 z-40">
-        <div className="container mx-auto px-4 lg:px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Camera className="h-8 w-8 text-brand-primary" />
-            <span className="text-2xl font-serif font-bold text-brand-dark">{siteContent.brand.name}</span>
-          </Link>
-          <nav className="hidden md:flex items-center space-x-8">
-            {siteContent.navigation.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className="text-slate-700 hover:text-brand-primary transition-colors font-medium"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      </header>
+      <Header siteContent={siteContent} />
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-r from-brand-secondary via-white to-brand-secondary">
