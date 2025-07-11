@@ -1,39 +1,34 @@
 {
-  "contactInfo": [
-    {
-      "type": "phone",
-      "icon": "Phone",
-      "label": "Teléfono",
-      "value": "+1 (555) 123-4567"
-    },
-    {
-      "type": "email",
-      "icon": "Mail",
-      "label": "Email",
-      "value": "info@memoriasdevida.com"
-    },
-    {
-      "type": "address",
-      "icon": "MapPin",
-      "label": "Ubicación",
-      "value": "123 Calle Principal, Ciudad"
-    }
-  ],
-  "socialMedia": [
-    {
-      "platform": "Instagram",
-      "icon": "Instagram",
-      "href": "#"
-    },
-    {
-      "platform": "Facebook",
-      "icon": "Facebook",
-      "href": "#"
-    },
-    {
-      "platform": "Twitter",
-      "icon": "Twitter",
-      "href": "#"
-    }
-  ]
+    "contactInfo": [
+        {
+            "type": "phone",
+            "icon": "Phone",
+            "label": "Teléfono",
+            "value": "+505 8923-6282"
+        },
+        {
+            "type": "email",
+            "icon": "Mail",
+            "label": "Email",
+            "value": "info@memoriasdevida.com"
+        },
+        {
+            "type": "address",
+            "icon": "MapPin",
+            "label": "Ubicación",
+            "value": "Condega, Esteli, Nicaragua"
+        }
+    ],
+    "socialMedia": [
+        {
+            "platform": "Instagram",
+            "icon": "Instagram",
+            "href": "https://www.instagram.com/memoriasdevida_foto"
+        },
+        {
+            "platform": "Facebook",
+            "icon": "Facebook",
+            "href": "https://www.facebook.com/people/Memorias-de-Vida-Foto/61558817271271"
+        }
+    ]
 }

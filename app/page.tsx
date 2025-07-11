@@ -24,6 +24,7 @@ import siteContent from '@/data/site-content.json'
 import testimonials from '@/data/testimonials.json'
 import contactData from '@/data/contact.json'
 import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 // Icon mapping
 const iconMap = {
@@ -72,9 +73,7 @@ export default function MemoriasDeVidaLanding() {
                             className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
                             asChild
                         >
-                            <Link href="/#servicios">
-                                {siteContent.hero.primaryButton}
-                            </Link>
+                            <Link href="/#servicios">{siteContent.hero.primaryButton}</Link>
                         </Button>
                     </div>
                 </div>
@@ -230,7 +229,7 @@ export default function MemoriasDeVidaLanding() {
                                     {siteContent.contact.form.title}
                                 </h3>
                                 <form className="space-y-6">
-                                    <div className="grid md:grid-cols-2 gap-4">
+                                    <div>
                                         <div>
                                             <label className="block text-sm font-medium text-slate-700 mb-2">
                                                 {siteContent.contact.form.fields.name}
@@ -240,18 +239,8 @@ export default function MemoriasDeVidaLanding() {
                                                 placeholder={
                                                     siteContent.contact.form.placeholders.name
                                                 }
-                                            />
-                                        </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-slate-700 mb-2">
-                                                {siteContent.contact.form.fields.email}
-                                            </label>
-                                            <Input
-                                                type="email"
-                                                className="border-brand-primary/30 focus:border-brand-primary focus:ring-brand-primary"
-                                                placeholder={
-                                                    siteContent.contact.form.placeholders.email
-                                                }
+                                                name="name"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -264,6 +253,9 @@ export default function MemoriasDeVidaLanding() {
                                             placeholder={
                                                 siteContent.contact.form.placeholders.phone
                                             }
+                                            type="tel"
+                                            name="phone"
+                                            required
                                         />
                                     </div>
                                     <div>
@@ -275,6 +267,8 @@ export default function MemoriasDeVidaLanding() {
                                             placeholder={
                                                 siteContent.contact.form.placeholders.message
                                             }
+                                            name="message"
+                                            required
                                         />
                                     </div>
                                     <Button className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300">
@@ -315,6 +309,9 @@ export default function MemoriasDeVidaLanding() {
                                             key={index}
                                             href={social.href}
                                             className="w-12 h-12 bg-brand-primary hover:bg-brand-primary/90 flex items-center justify-center text-white transition-colors"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            title={social.platform}
                                         >
                                             <IconComponent className="h-6 w-6" />
                                         </Link>
@@ -326,55 +323,7 @@ export default function MemoriasDeVidaLanding() {
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="bg-brand-dark text-white py-12">
-                <div className="container mx-auto px-4 lg:px-6">
-                    <div className="grid md:grid-cols-4 gap-8">
-                        <div className="col-span-2">
-                            <div className="flex items-center space-x-2 mb-4">
-                                <Camera className="h-8 w-8 text-brand-primary" />
-                                <span className="text-2xl font-serif font-bold">
-                                    {siteContent.brand.name}
-                                </span>
-                            </div>
-                            <p className="text-slate-300 leading-relaxed max-w-md">
-                                {siteContent.brand.tagline}
-                            </p>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold mb-4">{siteContent.footer.quickLinks}</h4>
-                            <ul className="space-y-2">
-                                {siteContent.navigation.links.map((item, index) => (
-                                    <li key={index}>
-                                        <Link
-                                            href={item.href}
-                                            className="text-slate-300 hover:text-brand-primary transition-colors"
-                                        >
-                                            {item.label}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 className="font-semibold mb-4">{siteContent.footer.services}</h4>
-                            <ul className="space-y-2">
-                                {siteContent.footer.servicesList.map((service, index) => (
-                                    <li key={index} className="text-slate-300">
-                                        {service}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="border-t border-slate-700 mt-8 pt-8 text-center">
-                        <p className="text-slate-400">
-                            © {new Date().getFullYear()} {siteContent.brand.name}.{' '}
-                            {siteContent.footer.copyright}
-                        </p>
-                    </div>
-                </div>
-            </footer>
+            <Footer siteContent={siteContent} />
         </div>
     )
 }

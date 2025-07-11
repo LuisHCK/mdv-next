@@ -31,13 +31,13 @@
         "subtitle": "Ofrecemos servicios de fotografía profesional personalizados para cada momento especial de tu vida",
         "items": [
             {
-                "title": "Bodas & Eventos",
-                "description": "Capturamos la magia de tu día especial con un estilo único y emotivo",
+                "title": "Sesiones en estudio",
+                "description": "Fotografía profesional en un ambiente acogedor y elegante",
                 "icon": "Heart"
             },
             {
-                "title": "Retratos Familiares",
-                "description": "Sesiones familiares que reflejan el amor y la conexión entre ustedes",
+                "title": "Atención personalizada",
+                "description": "Asesoría completa para capturar tus momentos más importantes",
                 "icon": "Users"
             },
             {
