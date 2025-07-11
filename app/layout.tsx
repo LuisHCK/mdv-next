@@ -3,9 +3,9 @@ import './globals.css'
 import { Toaster } from '@/components/ui/sonner'
 
 export const metadata: Metadata = {
-    title: 'v0 App',
-    description: 'Created with v0',
-    generator: 'v0.dev'
+    title: 'Memorias de Vida | Fotografia profesional en estudio',
+    description: 'Captura y conserva tus momentos más preciados con nuestra fotografía profesional en estudio.',
+    keywords: ['fotografía', 'estudio', 'profesional', 'memorias', 'vida']
 }
 
 export default function RootLayout({
