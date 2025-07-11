@@ -50,38 +50,31 @@ export default function MemoriasDeVidaLanding() {
                 className="relative h-screen flex items-center justify-center overflow-hidden"
             >
                 <div className="absolute inset-0 z-0">
-                    <Image
-                        src={siteContent.hero.backgroundImage.src || '/placeholder.svg'}
-                        alt={siteContent.hero.backgroundImage.alt}
-                        fill
-                        className="object-cover opacity-20"
-                        priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-brand-secondary/80 via-transparent to-brand-secondary/80" />
+                    <video autoPlay loop muted className="w-full h-full object-cover">
+                        <source src="/hero-video.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    {/* <div className="absolute inset-0 bg-gradient-to-r from-brand-secondary/80 via-transparent to-brand-secondary/80" /> */}
                 </div>
-                <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-                    <h1 className="text-5xl md:text-7xl font-serif font-bold text-brand-dark mb-6 leading-tight">
-                        {siteContent.hero.title}
-                        <span className="text-brand-primary block">
-                            {siteContent.hero.highlight}
-                        </span>
-                    </h1>
-                    <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+                <div className="flex flex-col justify-center items-center gap-6 relative z-10 text-center max-w-4xl mx-auto px-4">
+                    <Image
+                        src="/logo-primary-large.avif"
+                        alt="Memorias de Vida Logo"
+                        width={600}
+                        height={400}
+                    />
+                    <p className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto leading-relaxed">
                         {siteContent.hero.subtitle}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Button
                             size="lg"
                             className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                            asChild
                         >
-                            {siteContent.hero.primaryButton}
-                        </Button>
-                        <Button
-                            size="lg"
-                            variant="outline"
-                            className="border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white px-8 py-4 text-lg transition-all duration-300 bg-transparent"
-                        >
-                            {siteContent.hero.secondaryButton}
+                            <Link href="/#servicios">
+                                {siteContent.hero.primaryButton}
+                            </Link>
                         </Button>
                     </div>
                 </div>
@@ -351,7 +344,7 @@ export default function MemoriasDeVidaLanding() {
                         <div>
                             <h4 className="font-semibold mb-4">{siteContent.footer.quickLinks}</h4>
                             <ul className="space-y-2">
-                                {siteContent.navigation.map((item, index) => (
+                                {siteContent.navigation.links.map((item, index) => (
                                     <li key={index}>
                                         <Link
                                             href={item.href}

@@ -1,16 +1,20 @@
 {
     "brand": {
         "name": "Memorias de Vida",
-        "tagline": "Capturamos los momentos más preciados de tu vida con un enfoque artístico y profesional que perdurará para siempre."
+        "tagline": "Sesiones fotográficas en estudio y exteriores"
     },
-    "navigation": [
-        { "label": "Inicio", "href": "/" },
-        { "label": "Paquetes", "href": "/paquetes" },
-        { "label": "Servicios", "href": "/#servicios" },
-        { "label": "Portafolio", "href": "/#portafolio" },
-        { "label": "Testimonios", "href": "/#testimonios" },
-        { "label": "Contacto", "href": "/#contacto" }
-    ],
+    "navigation": {
+        "links": [
+            { "label": "Inicio", "href": "/" },
+            { "label": "Paquetes", "href": "/paquetes" },
+            { "label": "Servicios", "href": "/#servicios" },
+            { "label": "Portafolio", "href": "/#portafolio" },
+            { "label": "Testimonios", "href": "/#testimonios" },
+            { "label": "Contacto", "href": "/#contacto" }
+        ],
+        "logo": "/logo.avif",
+        "logoAlt": "Memorias de Vida Logo"
+    },
     "hero": {
         "title": "Capturamos tus",
         "highlight": "Memorias de Vida",

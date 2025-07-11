@@ -3,6 +3,7 @@ import { Camera } from 'lucide-react'
 import { SiteContentData } from '@/types'
 import Link from 'next/link'
 import { Button } from './ui/button'
+import Image from 'next/image'
 
 interface HeaderProps {
     siteContent: SiteContentData
@@ -13,13 +14,10 @@ const Header = ({ siteContent }: HeaderProps) => {
         <header className="fixed top-0 w-full bg-white/90 backdrop-blur-md border-b border-brand-primary/20 z-50">
             <div className="container mx-auto px-4 lg:px-6 h-16 flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                    <Camera className="h-8 w-8 text-brand-primary" />
-                    <span className="text-2xl font-serif font-bold text-brand-dark">
-                        {siteContent.brand.name}
-                    </span>
+                    <Image src={siteContent.navigation.logo} alt={siteContent.navigation.logoAlt} width={64} height={64} />
                 </div>
                 <nav className="hidden md:flex items-center space-x-8">
-                    {siteContent.navigation.map((item, index) => (
+                    {siteContent.navigation.links.map((item, index) => (
                         <Link
                             key={index}
                             href={item.href}

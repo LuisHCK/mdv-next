@@ -193,9 +193,15 @@ export interface CTA {
     link: string
 }
 
+export interface Navigation {
+    links: NavigationItem[]
+    logo: string
+    logoAlt: string
+}
+
 export interface SiteContentData {
     brand: Brand
-    navigation: NavigationItem[]
+    navigation: Navigation
     hero: SiteHero
     services: Services
     portfolio: Portfolio
