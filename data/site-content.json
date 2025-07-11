@@ -1,126 +1,127 @@
 {
-  "brand": {
-    "name": "Memorias de Vida",
-    "tagline": "Capturamos los momentos más preciados de tu vida con un enfoque artístico y profesional que perdurará para siempre."
-  },
-  "navigation": [
-    { "label": "Inicio", "href": "#inicio" },
-    { "label": "Servicios", "href": "#servicios" },
-    { "label": "Paquetes", "href": "/paquetes" },
-    { "label": "Portafolio", "href": "#portafolio" },
-    { "label": "Testimonios", "href": "#testimonios" },
-    { "label": "Contacto", "href": "#contacto" }
-  ],
-  "hero": {
-    "title": "Capturamos tus",
-    "highlight": "Memorias de Vida",
-    "subtitle": "Transformamos momentos especiales en recuerdos eternos con fotografía profesional que cuenta tu historia única",
-    "primaryButton": "Ver Portafolio",
-    "secondaryButton": "Conocer Más",
-    "backgroundImage": {
-      "src": "/placeholder.svg?height=1080&width=1920",
-      "alt": "Fotografía profesional de familia"
+    "brand": {
+        "name": "Memorias de Vida",
+        "tagline": "Capturamos los momentos más preciados de tu vida con un enfoque artístico y profesional que perdurará para siempre."
+    },
+    "navigation": [
+        { "label": "Inicio", "href": "/" },
+        { "label": "Paquetes", "href": "/paquetes" },
+        { "label": "Servicios", "href": "/#servicios" },
+        { "label": "Portafolio", "href": "/#portafolio" },
+        { "label": "Testimonios", "href": "/#testimonios" },
+        { "label": "Contacto", "href": "/#contacto" }
+    ],
+    "hero": {
+        "title": "Capturamos tus",
+        "highlight": "Memorias de Vida",
+        "subtitle": "Transformamos momentos especiales en recuerdos eternos con fotografía profesional que cuenta tu historia única",
+        "primaryButton": "Ver Portafolio",
+        "secondaryButton": "Conocer Más",
+        "backgroundImage": {
+            "src": "/placeholder.svg?height=1080&width=1920",
+            "alt": "Fotografía profesional de familia"
+        }
+    },
+    "services": {
+        "title": "Nuestros Servicios",
+        "subtitle": "Ofrecemos servicios de fotografía profesional personalizados para cada momento especial de tu vida",
+        "items": [
+            {
+                "title": "Bodas & Eventos",
+                "description": "Capturamos la magia de tu día especial con un estilo único y emotivo",
+                "icon": "Heart"
+            },
+            {
+                "title": "Retratos Familiares",
+                "description": "Sesiones familiares que reflejan el amor y la conexión entre ustedes",
+                "icon": "Users"
+            },
+            {
+                "title": "Reserva Online",
+                "description": "Sistema de reservas fácil y conveniente para programar tu sesión",
+                "icon": "Calendar"
+            },
+            {
+                "title": "Calidad Premium",
+                "description": "Entrega de imágenes en alta resolución con edición profesional",
+                "icon": "Award"
+            }
+        ]
+    },
+    "portfolio": {
+        "title": "Nuestro Portafolio",
+        "subtitle": "Una selección de nuestros trabajos más recientes que muestran la belleza de cada momento capturado",
+        "images": [
+            {
+                "src": "/placeholder.svg?height=400&width=600",
+                "alt": "Fotografía profesional 1",
+                "title": "Sesión Familiar",
+                "description": "Momentos únicos capturados con amor"
+            },
+            {
+                "src": "/placeholder.svg?height=400&width=600",
+                "alt": "Fotografía profesional 2",
+                "title": "Sesión Familiar",
+                "description": "Momentos únicos capturados con amor"
+            },
+            {
+                "src": "/placeholder.svg?height=400&width=600",
+                "alt": "Fotografía profesional 3",
+                "title": "Sesión Familiar",
+                "description": "Momentos únicos capturados con amor"
+            },
+            {
+                "src": "/placeholder.svg?height=400&width=600",
+                "alt": "Fotografía profesional 4",
+                "title": "Sesión Familiar",
+                "description": "Momentos únicos capturados con amor"
+            },
+            {
+                "src": "/placeholder.svg?height=400&width=600",
+                "alt": "Fotografía profesional 5",
+                "title": "Sesión Familiar",
+                "description": "Momentos únicos capturados con amor"
+            },
+            {
+                "src": "/placeholder.svg?height=400&width=600",
+                "alt": "Fotografía profesional 6",
+                "title": "Sesión Familiar",
+                "description": "Momentos únicos capturados con amor"
+            }
+        ]
+    },
+    "testimonials": {
+        "title": "Lo que Dicen Nuestros Clientes",
+        "subtitle": "La satisfacción de nuestros clientes es nuestro mayor logro"
+    },
+    "contact": {
+        "title": "Contáctanos",
+        "subtitle": "¿Listo para capturar tus momentos especiales? Ponte en contacto con nosotros",
+        "form": {
+            "title": "Envíanos un Mensaje",
+            "fields": {
+                "name": "Nombre",
+                "email": "Email",
+                "phone": "Teléfono",
+                "message": "Mensaje"
+            },
+            "placeholders": {
+                "name": "Tu nombre",
+                "email": "tu@email.com",
+                "phone": "Tu número de teléfono",
+                "message": "Cuéntanos sobre tu proyecto..."
+            },
+            "submitButton": "Enviar Mensaje"
+        }
+    },
+    "footer": {
+        "quickLinks": "Enlaces Rápidos",
+        "services": "Servicios",
+        "servicesList": ["Bodas", "Retratos", "Eventos", "Corporativo"],
+        "copyright": "Todos los derechos reservados."
+    },
+    "cta": {
+        "button": "Reservar Sesión",
+        "link": "/reservas"
     }
-  },
-  "services": {
-    "title": "Nuestros Servicios",
-    "subtitle": "Ofrecemos servicios de fotografía profesional personalizados para cada momento especial de tu vida",
-    "items": [
-      {
-        "title": "Bodas & Eventos",
-        "description": "Capturamos la magia de tu día especial con un estilo único y emotivo",
-        "icon": "Heart"
-      },
-      {
-        "title": "Retratos Familiares",
-        "description": "Sesiones familiares que reflejan el amor y la conexión entre ustedes",
-        "icon": "Users"
-      },
-      {
-        "title": "Reserva Online",
-        "description": "Sistema de reservas fácil y conveniente para programar tu sesión",
-        "icon": "Calendar"
-      },
-      {
-        "title": "Calidad Premium",
-        "description": "Entrega de imágenes en alta resolución con edición profesional",
-        "icon": "Award"
-      }
-    ]
-  },
-  "portfolio": {
-    "title": "Nuestro Portafolio",
-    "subtitle": "Una selección de nuestros trabajos más recientes que muestran la belleza de cada momento capturado",
-    "images": [
-      {
-        "src": "/placeholder.svg?height=400&width=600",
-        "alt": "Fotografía profesional 1",
-        "title": "Sesión Familiar",
-        "description": "Momentos únicos capturados con amor"
-      },
-      {
-        "src": "/placeholder.svg?height=400&width=600",
-        "alt": "Fotografía profesional 2",
-        "title": "Sesión Familiar",
-        "description": "Momentos únicos capturados con amor"
-      },
-      {
-        "src": "/placeholder.svg?height=400&width=600",
-        "alt": "Fotografía profesional 3",
-        "title": "Sesión Familiar",
-        "description": "Momentos únicos capturados con amor"
-      },
-      {
-        "src": "/placeholder.svg?height=400&width=600",
-        "alt": "Fotografía profesional 4",
-        "title": "Sesión Familiar",
-        "description": "Momentos únicos capturados con amor"
-      },
-      {
-        "src": "/placeholder.svg?height=400&width=600",
-        "alt": "Fotografía profesional 5",
-        "title": "Sesión Familiar",
-        "description": "Momentos únicos capturados con amor"
-      },
-      {
-        "src": "/placeholder.svg?height=400&width=600",
-        "alt": "Fotografía profesional 6",
-        "title": "Sesión Familiar",
-        "description": "Momentos únicos capturados con amor"
-      }
-    ]
-  },
-  "testimonials": {
-    "title": "Lo que Dicen Nuestros Clientes",
-    "subtitle": "La satisfacción de nuestros clientes es nuestro mayor logro"
-  },
-  "contact": {
-    "title": "Contáctanos",
-    "subtitle": "¿Listo para capturar tus momentos especiales? Ponte en contacto con nosotros",
-    "form": {
-      "title": "Envíanos un Mensaje",
-      "fields": {
-        "name": "Nombre",
-        "email": "Email",
-        "phone": "Teléfono",
-        "message": "Mensaje"
-      },
-      "placeholders": {
-        "name": "Tu nombre",
-        "email": "tu@email.com",
-        "phone": "Tu número de teléfono",
-        "message": "Cuéntanos sobre tu proyecto..."
-      },
-      "submitButton": "Enviar Mensaje"
-    }
-  },
-  "footer": {
-    "quickLinks": "Enlaces Rápidos",
-    "services": "Servicios",
-    "servicesList": ["Bodas", "Retratos", "Eventos", "Corporativo"],
-    "copyright": "Todos los derechos reservados."
-  },
-  "cta": {
-    "button": "Reservar Sesión"
-  }
 }

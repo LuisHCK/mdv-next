@@ -1,378 +1,175 @@
 {
-  "hero": {
-    "title": "Nuestros",
-    "highlight": "Paquetes",
-    "subtitle": "Encuentra el paquete perfecto para capturar tus momentos más especiales. Cada paquete está diseñado para adaptarse a tus necesidades y presupuesto.",
-    "backButton": "Volver al inicio"
-  },
-  "packages": [
-    {
-      "name": "Bodas & Eventos",
-      "description": "Captura cada momento mágico de tu día especial",
-      "icon": "Heart",
-      "color": "rose",
-      "tiers": [
-        {
-          "name": "Esencial",
-          "price": "$1,200",
-          "duration": "6 horas",
-          "photos": "300+ fotos editadas",
-          "features": [
-            "Cobertura de ceremonia y recepción",
-            "Galería online privada",
-            "Fotos en alta resolución",
-            "Edición profesional básica"
-          ],
-          "delivery": "2-3 semanas",
-          "popular": false
-        },
-        {
-          "name": "Premium",
-          "price": "$2,000",
-          "duration": "8 horas",
-          "photos": "500+ fotos editadas",
-          "features": [
-            "Cobertura completa del evento",
-            "Sesión de compromiso incluida",
-            "Álbum digital premium",
-            "Edición artística avanzada",
-            "USB personalizado",
-            "Galería online por 1 año"
-          ],
-          "delivery": "2-3 semanas",
-          "popular": true
-        },
-        {
-          "name": "Luxury",
-          "price": "$3,500",
-          "duration": "10 horas",
-          "photos": "800+ fotos editadas",
-          "features": [
-            "Cobertura completa + preparativos",
-            "Segundo fotógrafo incluido",
-            "Sesión de compromiso + trash the dress",
-            "Álbum físico premium 30x30cm",
-            "Video highlights del día",
-            "Entrega en caja de lujo",
-            "Galería online ilimitada"
-          ],
-          "delivery": "3-4 semanas",
-          "popular": false
-        }
-      ]
+    "hero": {
+        "title": "Nuestros",
+        "highlight": "Paquetes",
+        "subtitle": "Encuentra el paquete perfecto para capturar tus momentos más especiales. Cada paquete está diseñado para adaptarse a tus necesidades y presupuesto.",
+        "backButton": "Volver al inicio"
     },
-    {
-      "name": "Retratos Familiares",
-      "description": "Momentos únicos en familia que perdurarán para siempre",
-      "icon": "Users",
-      "color": "amber",
-      "tiers": [
+    "packages": [
         {
-          "name": "Básico",
-          "price": "$300",
-          "duration": "1 hora",
-          "photos": "25+ fotos editadas",
-          "features": [
-            "Sesión en estudio o exterior",
-            "Galería online privada",
-            "Fotos en alta resolución",
-            "Edición básica incluida"
-          ],
-          "delivery": "1 semana",
-          "popular": false
+            "id": "infantil",
+            "name": "Infantil",
+            "description": "",
+            "icon": "Baby",
+            "color": "purple",
+            "tiers": [
+                {
+                    "id": "infantil-1",
+                    "name": "Paquete 1",
+                    "price": "$30",
+                    "duration": "1 hora",
+                    "photos": "5 fotografías digitales",
+                    "features": [
+                        "Solo participa un niño",
+                        "1 cambio de ropa",
+                        "Sesión en estudio",
+                        "Acompañante adicional $5",
+                        "Fotografía extra $2 por foto"
+                    ],
+                    "delivery": "4 días hábiles",
+                    "popular": false
+                },
+                {
+                    "id": "infantil-2",
+                    "name": "Paquete 2",
+                    "price": "$40",
+                    "duration": "1:30 horas",
+                    "photos": "8 fotografías digitales",
+                    "features": [
+                        "Solo participa un niño",
+                        "2 cambios de ropa",
+                        "Sesión en estudio",
+                        "Acompañante adicional incluido",
+                        "Fotografía extra $2 por foto"
+                    ],
+                    "delivery": "6 días hábiles",
+                    "popular": true
+                }
+            ]
         },
         {
-          "name": "Completo",
-          "price": "$500",
-          "duration": "1.5 horas",
-          "photos": "50+ fotos editadas",
-          "features": [
-            "Sesión en 2 locaciones",
-            "Cambio de vestuario",
-            "Galería online premium",
-            "Edición artística",
-            "10 fotos impresas 13x18cm",
-            "USB personalizado"
-          ],
-          "delivery": "1 semana",
-          "popular": true
+            "id": "celebrate-cumpleanos",
+            "name": "Celebrate/Cumpleaños",
+            "description": "",
+            "icon": "Crown",
+            "color": "rose",
+            "tiers": [
+                {
+                    "id": "celebrate-cumpleanos-1",
+                    "name": "Paquete 1",
+                    "price": "$20",
+                    "duration": "1 hora",
+                    "photos": "5 fotografías digitales",
+                    "features": [
+                        "Solo participa el cumpleañero(a)",
+                        "1 cambio de ropa",
+                        "Sesión en estudio",
+                        "Acompañante adicional $5",
+                        "Fotografía extra $2 por foto"
+                    ],
+                    "delivery": "7 días hábiles",
+                    "popular": false
+                },
+                {
+                    "id": "celebrate-cumpleanos-2",
+                    "name": "Paquete 2",
+                    "price": "$30",
+                    "duration": "1:30 horas",
+                    "photos": "8 fotografías digitales",
+                    "features": [
+                        "Solo participa el cumpleañero(a)",
+                        "2 cambios de ropa",
+                        "Sesión en estudio",
+                        "Acompañante adicional $5",
+                        "Fotografía extra $2 por foto"
+                    ],
+                    "delivery": "7 días hábiles",
+                    "popular": true
+                }
+            ]
         },
         {
-          "name": "Deluxe",
-          "price": "$800",
-          "duration": "2 horas",
-          "photos": "80+ fotos editadas",
-          "features": [
-            "Sesión en múltiples locaciones",
-            "Múltiples cambios de vestuario",
-            "Álbum familiar 25x25cm",
-            "20 fotos impresas premium",
-            "Canvas 40x60cm incluido",
-            "Sesión de mascotas incluida",
-            "Galería online por 6 meses"
-          ],
-          "delivery": "1-2 semanas",
-          "popular": false
-        }
-      ]
-    },
-    {
-      "name": "Retratos Individuales",
-      "description": "Sesiones personalizadas que reflejan tu personalidad única",
-      "icon": "Camera",
-      "color": "emerald",
-      "tiers": [
-        {
-          "name": "Express",
-          "price": "$200",
-          "duration": "45 minutos",
-          "photos": "15+ fotos editadas",
-          "features": ["Sesión en estudio", "1 cambio de vestuario", "Galería online básica", "Edición profesional"],
-          "delivery": "3-5 días",
-          "popular": false
+            "id": "perfil-profesional",
+            "name": "Perfil Profesional",
+            "description": "",
+            "icon": "Camera",
+            "color": "rose",
+            "tiers": [
+                {
+                    "id": "perfil-profesional-unico",
+                    "name": "Paquete Único",
+                    "price": "$60",
+                    "duration": "2:30 horas",
+                    "photos": "8 fotografías digitales",
+                    "features": [
+                        "1 Fotografía impresa (8x10)",
+                        "Solo participa una persona",
+                        "Cambios de ropa sin límite",
+                        "Sesión en estudio",
+                        "Snack durante la sesión",
+                        "Acompañante adicional $5",
+                        "Fotografía extra $2 por foto"
+                    ],
+                    "delivery": "10 días hábiles",
+                    "popular": false
+                }
+            ]
         },
         {
-          "name": "Professional",
-          "price": "$400",
-          "duration": "1.5 horas",
-          "photos": "35+ fotos editadas",
-          "features": [
-            "Sesión en estudio + exterior",
-            "3 cambios de vestuario",
-            "Maquillaje profesional básico",
-            "Galería online premium",
-            "5 fotos impresas 20x25cm",
-            "Edición artística avanzada"
-          ],
-          "delivery": "1 semana",
-          "popular": true
+            "id": "aire-libre",
+            "name": "Paquete Aire Libre",
+            "description": "Picnic, casuales, tus 15, otros",
+            "icon": "Mountain",
+            "color": "amber",
+            "tiers": [
+                {
+                    "id": "aire-libre-unico",
+                    "name": "Paquete Único",
+                    "price": "$60",
+                    "duration": "2 horas",
+                    "photos": "8 fotografías digitales",
+                    "features": [
+                        "1 a 2 personas máximo",
+                        "Varios cambios de ropa",
+                        "Sesión al aire libre",
+                        "Acompañante adicional $5",
+                        "Fotografía extra $5 por foto"
+                    ],
+                    "delivery": "6 días hábiles",
+                    "popular": false
+                }
+            ]
         },
         {
-          "name": "Glamour",
-          "price": "$700",
-          "duration": "2.5 horas",
-          "photos": "60+ fotos editadas",
-          "features": [
-            "Sesión completa multi-locación",
-            "Maquillaje y peinado profesional",
-            "Vestuario y accesorios incluidos",
-            "Álbum personal 20x20cm",
-            "Canvas artístico 50x70cm",
-            "Retoque de belleza premium",
-            "Sesión de estilo boudoir opcional"
-          ],
-          "delivery": "1-2 semanas",
-          "popular": false
+            "id": "para-el-recuerdo",
+            "name": "Para el Recuerdo",
+            "description": "Casuales/Elegantes",
+            "icon": "Heart",
+            "color": "emerald",
+            "tiers": [
+                {
+                    "id": "para-el-recuerdo-unico",
+                    "name": "Paquete Único",
+                    "price": "$30",
+                    "duration": "2 horas",
+                    "photos": "5 fotografías digitales",
+                    "features": [
+                        "1 a 2 personas máximo",
+                        "2 cambios de ropa",
+                        "Sesión en estudio",
+                        "Acompañante adicional $5",
+                        "Fotografía extra $2 por foto"
+                    ],
+                    "delivery": "6 días hábiles",
+                    "popular": false
+                }
+            ]
         }
-      ]
-    },
-    {
-      "name": "Eventos Corporativos",
-      "description": "Cobertura profesional para eventos empresariales",
-      "icon": "Sparkles",
-      "color": "purple",
-      "tiers": [
-        {
-          "name": "Básico",
-          "price": "$600",
-          "duration": "3 horas",
-          "photos": "150+ fotos editadas",
-          "features": [
-            "Cobertura del evento principal",
-            "Fotos de grupo y networking",
-            "Galería online corporativa",
-            "Entrega en 48 horas"
-          ],
-          "delivery": "2 días",
-          "popular": false
-        },
-        {
-          "name": "Empresarial",
-          "price": "$1,000",
-          "duration": "5 horas",
-          "photos": "300+ fotos editadas",
-          "features": [
-            "Cobertura completa del evento",
-            "Retratos ejecutivos individuales",
-            "Fotos de productos/servicios",
-            "Galería con marca corporativa",
-            "Derechos de uso comercial",
-            "Entrega express 24 horas"
-          ],
-          "delivery": "1 día",
-          "popular": true
-        },
-        {
-          "name": "Premium",
-          "price": "$1,800",
-          "duration": "8 horas",
-          "photos": "500+ fotos editadas",
-          "features": [
-            "Cobertura integral multi-evento",
-            "Video corporativo incluido",
-            "Fotógrafo adicional",
-            "Edición con branding corporativo",
-            "Álbum corporativo premium",
-            "Derechos comerciales extendidos",
-            "Soporte técnico en vivo"
-          ],
-          "delivery": "1 día",
-          "popular": false
-        }
-      ]
-    },
-    {
-      "name": "Perfil Profesional",
-      "description": "",
-      "icon": "Camera",
-      "color": "rose",
-      "tiers": [
-        {
-          "name": "Paquete Único",
-          "price": "$60",
-          "duration": "2:30 horas",
-          "photos": "8 fotografías digitales",
-          "features": [
-            "1 Fotografía impresa (8x10)",
-            "Solo participa una persona",
-            "Cambios de ropa sin límite",
-            "Sesión en estudio",
-            "Snack durante la sesión",
-            "Acompañante adicional $5",
-            "Fotografía extra $2 por foto"
-          ],
-          "delivery": "10 días hábiles",
-          "popular": false
-        }
-      ]
-    },
-    {
-      "name": "Paquete Aire Libre",
-      "description": "Picnic, casuales, tus 15, otros",
-      "icon": "Users",
-      "color": "amber",
-      "tiers": [
-        {
-          "name": "Paquete Único",
-          "price": "$60",
-          "duration": "2 horas",
-          "photos": "8 fotografías digitales",
-          "features": [
-            "1 a 2 personas máximo",
-            "Varios cambios de ropa",
-            "Sesión al aire libre",
-            "Acompañante adicional $5",
-            "Fotografía extra $5 por foto"
-          ],
-          "delivery": "6 días hábiles",
-          "popular": true
-        }
-      ]
-    },
-    {
-      "name": "Para el Recuerdo",
-      "description": "Casuales/Elegantes",
-      "icon": "Heart",
-      "color": "emerald",
-      "tiers": [
-        {
-          "name": "Paquete Único",
-          "price": "$30",
-          "duration": "2 horas",
-          "photos": "5 fotografías digitales",
-          "features": [
-            "1 a 2 personas máximo",
-            "2 cambios de ropa",
-            "Sesión en estudio",
-            "Acompañante adicional $5",
-            "Fotografía extra $2 por foto"
-          ],
-          "delivery": "6 días hábiles",
-          "popular": false
-        }
-      ]
-    },
-    {
-      "name": "Infantil",
-      "description": "",
-      "icon": "Sparkles",
-      "color": "purple",
-      "tiers": [
-        {
-          "name": "Paquete 1",
-          "price": "$30",
-          "duration": "1 hora",
-          "photos": "5 fotografías digitales",
-          "features": [
-            "Solo participa un niño",
-            "1 cambio de ropa",
-            "Sesión en estudio",
-            "Acompañante adicional $5",
-            "Fotografía extra $2 por foto"
-          ],
-          "delivery": "4 días hábiles",
-          "popular": false
-        },
-        {
-          "name": "Paquete 2",
-          "price": "$40",
-          "duration": "1:30 horas",
-          "photos": "8 fotografías digitales",
-          "features": [
-            "Solo participa un niño",
-            "2 cambios de ropa",
-            "Sesión en estudio",
-            "Acompañante adicional incluido",
-            "Fotografía extra $2 por foto"
-          ],
-          "delivery": "6 días hábiles",
-          "popular": true
-        }
-      ]
-    },
-    {
-      "name": "Celebrate/Cumpleaños",
-      "description": "",
-      "icon": "Crown",
-      "color": "rose",
-      "tiers": [
-        {
-          "name": "Paquete 1",
-          "price": "$20",
-          "duration": "1 hora",
-          "photos": "5 fotografías digitales",
-          "features": [
-            "Solo participa el cumpleañero(a)",
-            "1 cambio de ropa",
-            "Sesión en estudio",
-            "Acompañante adicional $5",
-            "Fotografía extra $2 por foto"
-          ],
-          "delivery": "7 días hábiles",
-          "popular": false
-        },
-        {
-          "name": "Paquete 2",
-          "price": "$30",
-          "duration": "1:30 horas",
-          "photos": "8 fotografías digitales",
-          "features": [
-            "Solo participa el cumpleañero(a)",
-            "2 cambios de ropa",
-            "Sesión en estudio",
-            "Acompañante adicional $5",
-            "Fotografía extra $2 por foto"
-          ],
-          "delivery": "7 días hábiles",
-          "popular": true
-        }
-      ]
+    ],
+    "cta": {
+        "title": "¿No encuentras lo que buscas?",
+        "subtitle": "Creamos paquetes personalizados adaptados a tus necesidades específicas. Contáctanos para una cotización personalizada.",
+        "primaryButton": "Cotización Personalizada",
+        "secondaryButton": "Hablar con un Experto"
     }
-  ],
-  "cta": {
-    "title": "¿No encuentras lo que buscas?",
-    "subtitle": "Creamos paquetes personalizados adaptados a tus necesidades específicas. Contáctanos para una cotización personalizada.",
-    "primaryButton": "Cotización Personalizada",
-    "secondaryButton": "Hablar con un Experto"
-  }
 }
