@@ -1,4 +1,4 @@
-import { Package, PackageTier } from '@/types'
+import { Package, PackageTier, Reservation, ReservationFormData } from '@/types'
 import PocketBase from 'pocketbase'
 
 const pb = new PocketBase(process.env.API_URL)
@@ -39,5 +39,15 @@ export const getPackages = async (): Promise<Package[]> => {
     } catch (error) {
         console.error('Error fetching packages:', error)
         throw error
+    }
+}
+
+export const createReservation = async (data: Omit<Reservation, 'id'>) => {
+    try {
+        const response = await pb.collection('reservations').create(data)
+        return response
+    } catch (error) {
+        console.error('Error creating reservation:', error)
+        return null
     }
 }

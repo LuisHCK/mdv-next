@@ -141,7 +141,7 @@ export interface PortfolioImage {
     src: string
     alt: string
     title: string
-    description: string,
+    description: string
     classnames?: string // Optional classnames for additional styling
 }
 
@@ -211,4 +211,25 @@ export interface SiteContentData {
     contact: ContactSection
     footer: Footer
     cta: CTA
+}
+
+interface Reservation {
+    id: string
+    datetime: string
+    package_id: string
+    tier_id: string
+    name: string
+    phone: string
+    message: string
+}
+
+
+interface ReservationFormData {
+    date: string
+    time: string
+    package: string
+    tier: string
+    name: string
+    phone: string
+    message: string
 }

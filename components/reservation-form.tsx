@@ -24,17 +24,8 @@ import {
     SelectTrigger,
     SelectValue
 } from '@/components/ui/select'
-import type { Package } from '@/types'
-
-interface FormData {
-    date: string
-    time: string
-    package: string
-    tier: string
-    name: string
-    phone: string
-    message: string
-}
+import type { Package, ReservationFormData } from '@/types'
+import { submitReservation } from '@/app/actions'
 
 const timeSlots = [
     '09:00 AM',
@@ -49,7 +40,7 @@ const timeSlots = [
 ]
 
 const ReservationForm = ({ packages }: { packages: Package[] }) => {
-    const [formData, setFormData] = useState<FormData>({
+    const [formData, setFormData] = useState<ReservationFormData>({
         date: '',
         time: '',
         package: '',
@@ -79,14 +70,22 @@ const ReservationForm = ({ packages }: { packages: Package[] }) => {
     const selectedTier = selectedPackage?.tiers.find((tier) => tier.id === formData.tier)
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setIsSubmitting(true)
+        try {
+            e.preventDefault()
+            setIsSubmitting(true)
 
-        // Simulate form submission
-        await new Promise((resolve) => setTimeout(resolve, 2000))
+            // Simulate form submission
+            // await new Promise((resolve) => setTimeout(resolve, 2000))
+            await submitReservation(formData)
 
-        setIsSubmitting(false)
-        setIsSubmitted(true)
+            setIsSubmitting(false)
+            setIsSubmitted(true)
+        } catch (error) {
+            console.error('Error submitting reservation:', error)
+            toast.error('Error al enviar la reserva. Inténtalo de nuevo más tarde.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     // Get packageId and tierId from query params and set defaults accordingly
