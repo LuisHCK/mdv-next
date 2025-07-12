@@ -221,15 +221,19 @@ interface Reservation {
     name: string
     phone: string
     message: string
+    created?: string // Optional field for created date
+    updated?: string // Optional field for updated date
 }
 
 
 interface ReservationFormData {
+    id?: string // Optional ID for existing reservations
     date: string
     time: string
     package: string
     tier: string
     name: string
     phone: string
-    message: string
+    message: string,
+    created?: string // Optional field for created date
 }

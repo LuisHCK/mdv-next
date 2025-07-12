@@ -42,12 +42,27 @@ export const getPackages = async (): Promise<Package[]> => {
     }
 }
 
-export const createReservation = async (data: Omit<Reservation, 'id'>) => {
+export const createReservation = async (
+    data: Omit<Reservation, 'id'>
+): Promise<Reservation | null> => {
     try {
-        const response = await pb.collection('reservations').create(data)
+        const response = await pb.collection('reservations').create<Reservation>(data)
         return response
     } catch (error) {
         console.error('Error creating reservation:', error)
+        return null
+    }
+}
+
+export const updateReservation = async (
+    id: string,
+    data: Partial<Reservation>
+): Promise<Reservation | null> => {
+    try {
+        const response = await pb.collection('reservations').update<Reservation>(id, data)
+        return response
+    } catch (error) {
+        console.error('Error updating reservation:', error)
         return null
     }
 }

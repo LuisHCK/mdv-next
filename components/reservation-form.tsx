@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import {
@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/select'
 import type { Package, ReservationFormData } from '@/types'
 import { submitReservation } from '@/app/actions'
+import { differenceInMinutes, parseISO } from 'date-fns'
 
 const timeSlots = [
     '09:00 AM',
@@ -40,6 +41,7 @@ const timeSlots = [
 ]
 
 const ReservationForm = ({ packages }: { packages: Package[] }) => {
+    const [loading, setLoading] = useState(true)
     const [formData, setFormData] = useState<ReservationFormData>({
         date: '',
         time: '',
@@ -68,6 +70,10 @@ const ReservationForm = ({ packages }: { packages: Package[] }) => {
     }
 
     const selectedTier = selectedPackage?.tiers.find((tier) => tier.id === formData.tier)
+    const submitText = formData.id ? 'Actualizar Reserva' : 'Confirmar Reserva'
+    const isRecentReservation = useMemo(() => {
+        return formData.created && differenceInMinutes(new Date(), parseISO(formData.created)) < 60
+    }, [formData.created])
 
     const handleSubmit = async (e: React.FormEvent) => {
         try {
@@ -76,10 +82,20 @@ const ReservationForm = ({ packages }: { packages: Package[] }) => {
 
             // Simulate form submission
             // await new Promise((resolve) => setTimeout(resolve, 2000))
-            await submitReservation(formData)
+            const savedReservation = await submitReservation(formData)
 
             setIsSubmitting(false)
             setIsSubmitted(true)
+
+            // Store the reservation data in localStorage
+            localStorage.setItem(
+                'reservationData',
+                JSON.stringify({
+                    ...formData,
+                    id: savedReservation.id,
+                    created: savedReservation.created
+                })
+            )
         } catch (error) {
             console.error('Error submitting reservation:', error)
             toast.error('Error al enviar la reserva. Inténtalo de nuevo más tarde.')
@@ -107,6 +123,47 @@ const ReservationForm = ({ packages }: { packages: Package[] }) => {
             toast.success(`Paquete ${packageData.name} seleccionado`, { id: 'package-select' })
         }
     }, [])
+
+    // Get the stored reservation data from localStorage
+    useEffect(() => {
+        try {
+            const storedData = localStorage.getItem('reservationData')
+
+            if (storedData) {
+                const parsedData: ReservationFormData = JSON.parse(storedData)
+                setFormData(parsedData)
+                const pkg = packages.find((p) => p.id === parsedData.package)
+
+                if (pkg) {
+                    setSelectedPackage(pkg)
+                    if (parsedData.tier) {
+                        const tier = pkg.tiers.find((t) => t.id === parsedData.tier)
+                        if (tier) {
+                            setFormData((prev) => ({ ...prev, tier: tier.id }))
+                        }
+                    }
+                }
+                setIsSubmitted(true)
+            }
+        } catch (error) {
+            console.error('Error retrieving reservation data from localStorage:', error)
+        } finally {
+            setLoading(false)
+        }
+    }, [packages])
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-secondary flex items-center justify-center">
+                <div className="text-center">
+                    <h2 className="text-2xl font-bold mb-4">Cargando...</h2>
+                    <p className="text-gray-600">
+                        Por favor, espera mientras se carga el formulario.
+                    </p>
+                </div>
+            </div>
+        )
+    }
 
     if (isSubmitted) {
         return (
@@ -150,9 +207,14 @@ const ReservationForm = ({ packages }: { packages: Package[] }) => {
                                     <Button asChild>
                                         <Link href="/">Volver al Inicio</Link>
                                     </Button>
-                                    <Button variant="outline" asChild>
-                                        <Link href="/paquetes">Ver Paquetes</Link>
-                                    </Button>
+                                    {isRecentReservation && (
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => setIsSubmitted(false)}
+                                        >
+                                            Editar Reservación
+                                        </Button>
+                                    )}
                                 </div>
                             </CardContent>
                         </Card>
@@ -395,7 +457,7 @@ const ReservationForm = ({ packages }: { packages: Package[] }) => {
                                         className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300"
                                         disabled={isSubmitting}
                                     >
-                                        {isSubmitting ? 'Enviando...' : 'Confirmar Reserva'}
+                                        {isSubmitting ? 'Enviando...' : submitText}
                                     </Button>
                                 </div>
                             </form>
