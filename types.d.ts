@@ -10,6 +10,7 @@ export interface PackageTier {
     features: string[]
     delivery: string
     popular: boolean
+    package_id: string // Reference to the package this tier belongs to
 }
 
 export interface Package {
@@ -140,7 +141,8 @@ export interface PortfolioImage {
     src: string
     alt: string
     title: string
-    description: string
+    description: string,
+    classnames?: string // Optional classnames for additional styling
 }
 
 export interface Portfolio {

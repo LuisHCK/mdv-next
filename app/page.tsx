@@ -3,7 +3,6 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Card, CardContent } from '@/components/ui/card'
 import {
-    Camera,
     Heart,
     Star,
     Users,
@@ -25,6 +24,7 @@ import testimonials from '@/data/testimonials.json'
 import contactData from '@/data/contact.json'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import { cn } from '@/lib/utils'
 
 // Icon mapping
 const iconMap = {
@@ -139,9 +139,12 @@ export default function MemoriasDeVidaLanding() {
                                 <Image
                                     src={image.src || '/placeholder.svg'}
                                     alt={image.alt}
-                                    width={600}
-                                    height={400}
-                                    className="object-cover w-full h-80 group-hover:scale-110 transition-transform duration-500"
+                                    width={320}
+                                    height={480}
+                                    className={cn(
+                                        "object-cover w-full h-100 group-hover:scale-110 transition-transform duration-500",
+                                        image.classnames
+                                    )}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <div className="absolute bottom-6 left-6 text-white">

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
+import type { PackageTier } from '@/types'
 
 import {
     Camera,
@@ -23,6 +24,10 @@ import siteContent from '@/data/site-content.json'
 import TierCard from '@/components/tier-card'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import { getPackages, getTiers } from '@/lib/pocketbase'
+
+// ISR Config
+export const revalidate = 3600
 
 // Icon mapping
 const iconMap = {
@@ -39,7 +44,14 @@ const iconMap = {
     Mountain
 }
 
-export default function PaquetesPage() {
+export default async function PaquetesPage() {
+    const packages = await getPackages()
+    const tiers = await getTiers()
+
+    const packageTiers = (packageId: string): PackageTier[] => {
+        return tiers.filter((tier) => tier.package_id === packageId)
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-brand-secondary via-white to-brand-secondary">
             <Header siteContent={siteContent} />
@@ -70,7 +82,7 @@ export default function PaquetesPage() {
 
             {/* Packages Sections */}
             <div className="py-16">
-                {packagesData.packages.map((packageData, packageIndex) => (
+                {packages.map((packageData, packageIndex) => (
                     <section
                         key={packageIndex}
                         className={packageIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50'}
@@ -100,7 +112,7 @@ export default function PaquetesPage() {
 
                             {/* Tiers Grid */}
                             <div className="flex gap-8 flex-wrap justify-center align-items-center">
-                                {packageData.tiers.map((tier, tierIndex) => (
+                                {packageTiers(packageData.id).map((tier, tierIndex) => (
                                     <TierCard
                                         key={tierIndex}
                                         tier={tier}

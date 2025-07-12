@@ -57,40 +57,46 @@
         "subtitle": "Una selección de nuestros trabajos más recientes que muestran la belleza de cada momento capturado",
         "images": [
             {
-                "src": "/placeholder.svg?height=400&width=600",
+                "src": "/mdv-sample-1.avif",
                 "alt": "Fotografía profesional 1",
                 "title": "Sesión Familiar",
-                "description": "Momentos únicos capturados con amor"
+                "description": "Momentos únicos capturados con amor",
+                "classnames": "object-top"
             },
             {
-                "src": "/placeholder.svg?height=400&width=600",
+                "src": "/mdv-sample-2.avif",
                 "alt": "Fotografía profesional 2",
                 "title": "Sesión Familiar",
-                "description": "Momentos únicos capturados con amor"
+                "description": "Momentos únicos capturados con amor",
+                "classnames": "object-top"
             },
             {
-                "src": "/placeholder.svg?height=400&width=600",
+                "src": "/mdv-sample-3.avif",
                 "alt": "Fotografía profesional 3",
                 "title": "Sesión Familiar",
-                "description": "Momentos únicos capturados con amor"
+                "description": "Momentos únicos capturados con amor",
+                "classnames": "object-top"
             },
             {
-                "src": "/placeholder.svg?height=400&width=600",
+                "src": "/mdv-sample-4.avif",
                 "alt": "Fotografía profesional 4",
                 "title": "Sesión Familiar",
-                "description": "Momentos únicos capturados con amor"
+                "description": "Momentos únicos capturados con amor",
+                "classnames": "object-top"
             },
             {
-                "src": "/placeholder.svg?height=400&width=600",
+                "src": "/mdv-sample-5.avif",
                 "alt": "Fotografía profesional 5",
                 "title": "Sesión Familiar",
-                "description": "Momentos únicos capturados con amor"
+                "description": "Momentos únicos capturados con amor",
+                "classnames": "object-top"
             },
             {
-                "src": "/placeholder.svg?height=400&width=600",
+                "src": "/mdv-sample-6.avif",
                 "alt": "Fotografía profesional 6",
                 "title": "Sesión Familiar",
-                "description": "Momentos únicos capturados con amor"
+                "description": "Momentos únicos capturados con amor",
+                "classnames": "object-top"
             }
         ]
     },
