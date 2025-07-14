@@ -33,7 +33,7 @@ export interface PackagesCTA {
     title: string
     subtitle: string
     primaryButton: string
-    secondaryButton: string
+    secondaryButton?: string
 }
 
 export interface PackagesData {

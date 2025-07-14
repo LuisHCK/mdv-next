@@ -4,21 +4,22 @@ import { Toaster } from '@/components/ui/sonner'
 
 const siteConfig = {
     name: 'Memorias de Vida',
-    description: 'Captura y conserva tus momentos más preciados con nuestra fotografía profesional en estudio.',
-    url: 'https://memoriasdevida.com',
+    description:
+        'Captura y conserva tus momentos más preciados con nuestra fotografía profesional en estudio.',
+    url: 'https://memoriasdevida.com'
 }
 
 export const metadata: Metadata = {
     title: {
         default: siteConfig.name,
-        template: `%s | ${siteConfig.name}`,
+        template: `%s | ${siteConfig.name}`
     },
     description: siteConfig.description,
     keywords: ['fotografía', 'estudio', 'profesional', 'memorias', 'vida'],
     authors: [
         {
-            name: 'Memorias de Vida',
-        },
+            name: 'Memorias de Vida'
+        }
     ],
     creator: 'Memorias de Vida',
     openGraph: {
@@ -28,19 +29,28 @@ export const metadata: Metadata = {
         title: siteConfig.name,
         description: siteConfig.description,
         siteName: siteConfig.name,
+        countryName: 'Nicaragua',
+        images: [
+            {
+                url: `${siteConfig.url}/og.jpg`,
+                width: 1200,
+                height: 630,
+                alt: siteConfig.name
+            }
+        ]
     },
     twitter: {
         card: 'summary_large_image',
         title: siteConfig.name,
         description: siteConfig.description,
         images: [`${siteConfig.url}/og.jpg`],
-        creator: '@memoriasdevida',
+        creator: '@memoriasdevida'
     },
     icons: {
         icon: '/favicon.ico',
         shortcut: '/favicon-16x16.png',
-        apple: '/apple-touch-icon.png',
-    },
+        apple: '/apple-touch-icon.png'
+    }
 }
 
 export default function RootLayout({
@@ -51,6 +61,13 @@ export default function RootLayout({
     return (
         <html lang="es" className="light" data-theme="light">
             <head>
+                <meta name="apple-mobile-web-app-title" content="Memorias de Vida" />
+                <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+                <link rel="shortcut icon" href="/favicon.ico" />
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+                <meta name="apple-mobile-web-app-title" content="Memorias de Vida" />
+                <link rel="manifest" href="/site.webmanifest" />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
@@ -62,12 +79,12 @@ export default function RootLayout({
                             url: siteConfig.url,
                             address: {
                                 '@type': 'PostalAddress',
-                                addressLocality: 'Ciudad de México',
-                                addressCountry: 'MX',
+                                addressLocality: 'Estelí',
+                                addressCountry: 'NI'
                             },
-                            telephone: '+52 55 1234 5678',
-                            image: `${siteConfig.url}/logo-primary-large.avif`,
-                        }),
+                            telephone: '+505 8923 6282',
+                            image: `${siteConfig.url}/logo-primary-large.avif`
+                        })
                     }}
                 />
             </head>

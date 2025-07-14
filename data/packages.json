@@ -169,7 +169,6 @@
     "cta": {
         "title": "¿No encuentras lo que buscas?",
         "subtitle": "Creamos paquetes personalizados adaptados a tus necesidades específicas. Contáctanos para una cotización personalizada.",
-        "primaryButton": "Cotización Personalizada",
-        "secondaryButton": "Hablar con un Experto"
+        "primaryButton": "Cotización Personalizada"
     }
 }

@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
     title: 'Paquetes de Fotografía',
     description:
-        'Explora nuestros paquetes de fotografía de estudio. Ofrecemos una variedad de opciones para capturar tus momentos especiales.',
+        'Explora nuestros paquetes de fotografía de estudio. Ofrecemos una variedad de opciones para capturar tus momentos especiales.'
 }
 
 import {
@@ -32,9 +32,7 @@ import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { getPackages, getTiers } from '@/lib/pocketbase'
 import { cn } from '@/lib/utils'
-
-// ISR Config
-export const revalidate = 3600
+import { unstable_cache } from 'next/cache'
 
 // Icon mapping
 const iconMap = {
@@ -51,27 +49,38 @@ const iconMap = {
     Mountain
 }
 
+const getCachedPackages = unstable_cache(
+    async () => {
+        return await getPackages()
+    },
+    ['packages'],
+    {
+        revalidate: 60 * 60, // Cache for 1 hour
+        tags: ['packages']
+    }
+)
+
 export default async function PaquetesPage() {
-    const packages = await getPackages()
-    const tiers = await getTiers()
+    const packages = await getCachedPackages()
 
     // Schema.org Service structured data
     const serviceSchema = {
         '@context': 'https://schema.org',
         '@type': 'Service',
         name: 'Paquetes de Fotografía',
-        description: 'Explora nuestros paquetes de fotografía de estudio. Ofrecemos una variedad de opciones para capturar tus momentos especiales.',
+        description:
+            'Explora nuestros paquetes de fotografía de estudio. Ofrecemos una variedad de opciones para capturar tus momentos especiales.',
         provider: {
             '@type': 'LocalBusiness',
-            name: 'Memorias de Vida',
+            name: 'Memorias de Vida'
         },
-        offers: packages.map(pkg => ({
+        offers: packages.map((pkg) => ({
             '@type': 'Offer',
             name: pkg.name,
             description: pkg.description,
             price: pkg.tiers?.[0]?.price || 0, // Assuming the first tier's price is representative
-            priceCurrency: 'USD',
-        })),
+            priceCurrency: 'USD'
+        }))
     }
 
     return (
@@ -166,22 +175,11 @@ export default async function PaquetesPage() {
                             <Button
                                 size="lg"
                                 className={cn(
-                                    "bg-white text-brand-primary hover:bg-brand-secondary px-8",
-                                    "py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                                    'bg-white text-brand-primary hover:bg-brand-secondary px-8',
+                                    'py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300'
                                 )}
                             >
                                 {packagesData.cta.primaryButton}
-                            </Button>
-                            <Button
-                                size="lg"
-                                variant="outline"
-                                className={cn(
-                                    "border-2 border-white text-white hover:bg-white",
-                                    "hover:text-rose-500 px-8 py-4 text-lg transition-all",
-                                    "duration-300 bg-transparent"
-                                )}
-                            >
-                                {packagesData.cta.secondaryButton}
                             </Button>
                         </div>
                     </div>
