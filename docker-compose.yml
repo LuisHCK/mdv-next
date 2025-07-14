@@ -6,4 +6,6 @@ services:
         environment:
             - NODE_ENV=production
             - NEXT_TELEMETRY_DISABLED=1
+        volumes:
+            - ./.next/cache:/app/.next/cache
         restart: unless-stopped
