@@ -31,6 +31,7 @@ import TierCard from '@/components/tier-card'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { getPackages, getTiers } from '@/lib/pocketbase'
+import { cn } from '@/lib/utils'
 
 // ISR Config
 export const revalidate = 3600
@@ -138,7 +139,7 @@ export default async function PaquetesPage() {
 
                                 {/* Tiers Grid */}
                                 <div className="flex gap-8 flex-wrap justify-center align-items-center">
-                                    {packageTiers(packageData.id).map((tier, tierIndex) => (
+                                    {packageData.tiers.map((tier, tierIndex) => (
                                         <TierCard
                                             key={tierIndex}
                                             tier={tier}
@@ -164,14 +165,21 @@ export default async function PaquetesPage() {
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button
                                 size="lg"
-                                className="bg-white text-brand-primary hover:bg-brand-secondary px-8 py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                                className={cn(
+                                    "bg-white text-brand-primary hover:bg-brand-secondary px-8",
+                                    "py-4 text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                                )}
                             >
                                 {packagesData.cta.primaryButton}
                             </Button>
                             <Button
                                 size="lg"
                                 variant="outline"
-                                className="border-2 border-white text-white hover:bg-white hover:text-rose-500 px-8 py-4 text-lg transition-all duration-300 bg-transparent"
+                                className={cn(
+                                    "border-2 border-white text-white hover:bg-white",
+                                    "hover:text-rose-500 px-8 py-4 text-lg transition-all",
+                                    "duration-300 bg-transparent"
+                                )}
                             >
                                 {packagesData.cta.secondaryButton}
                             </Button>
