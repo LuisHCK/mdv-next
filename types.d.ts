@@ -221,6 +221,7 @@ interface Reservation {
     name: string
     phone: string
     message: string
+    status?: 'pending' | 'approved' | 'rejected' // Optional field for reservation status
     created?: string // Optional field for created date
     updated?: string // Optional field for updated date
 }
@@ -237,3 +238,17 @@ interface ReservationFormData {
     message: string,
     created?: string // Optional field for created date
 }
+
+export interface User {
+    collectionId: string
+    collectionName: string
+    id: string
+    email: string
+    emailVisibility: boolean
+    verified: boolean
+    name: string
+    avatar: string
+    created: string
+    updated: string
+}
+

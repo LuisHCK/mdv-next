@@ -1,5 +1,6 @@
-import { Package, PackageTier, Reservation, ReservationFormData } from '@/types'
-import PocketBase from 'pocketbase'
+import { Package, PackageTier, Reservation, User } from '@/types'
+import PocketBase, { RecordAuthResponse } from 'pocketbase'
+import Cookies from 'js-cookie'
 
 const pb = new PocketBase(process.env.API_URL)
 pb.autoCancellation(false)
@@ -46,7 +47,9 @@ export const createReservation = async (
     data: Omit<Reservation, 'id'>
 ): Promise<Reservation | null> => {
     try {
-        const response = await pb.collection('reservations').create<Reservation>(data)
+        const response = await pb
+            .collection('reservations')
+            .create<Reservation>({ ...data, status: 'pending' })
         return response
     } catch (error) {
         console.error('Error creating reservation:', error)
@@ -59,10 +62,72 @@ export const updateReservation = async (
     data: Partial<Reservation>
 ): Promise<Reservation | null> => {
     try {
+        // Remove the status field if it exists in the data
+        if (data.status) {
+            delete data.status
+        }
         const response = await pb.collection('reservations').update<Reservation>(id, data)
         return response
     } catch (error) {
         console.error('Error updating reservation:', error)
         return null
+    }
+}
+
+export const loginUser = async (
+    email: string,
+    password: string
+): Promise<RecordAuthResponse | null> => {
+    try {
+        const authData = await pb.collection('users').authWithPassword(email, password)
+        return authData
+    } catch (error) {
+        console.error('Login failed:', error)
+        return null
+    }
+}
+
+export const getProfile = async (token: string): Promise<User | null> => {
+    try {
+        pb.authStore.save(token)
+        const profile = await pb.collection('users').getList<User>(1, 1)
+
+        if (profile.items.length === 0) {
+            throw new Error('Profile not found')
+        }
+        return profile.items[0]
+    } catch (error) {
+        console.error('Error fetching profile:', error)
+        return null
+    }
+}
+
+export const getReservations = async (token: string): Promise<Reservation[]> => {
+    try {
+        pb.authStore.save(token)
+        const response = await pb
+            .collection<Reservation>('reservations')
+            .getFullList({ sort: '-created' })
+        return response
+    } catch (error) {
+        console.error('Error fetching reservations:', error)
+        throw error
+    }
+}
+
+export const updateAdminReservation = async (
+    id: string,
+    data: Partial<Reservation>,
+    token: string
+) => {
+    try {
+        pb.authStore.save(token)
+        const response = await pb
+            .collection<Reservation>('reservations')
+            .update<Reservation>(id, data)
+        return response
+    } catch (error) {
+        console.error('Error updating reservation status:', error)
+        throw error
     }
 }

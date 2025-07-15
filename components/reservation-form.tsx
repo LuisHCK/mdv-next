@@ -96,6 +96,12 @@ const ReservationForm = ({ packages }: { packages: Package[] }) => {
                     created: savedReservation.created
                 })
             )
+
+            setFormData((prev) => ({
+                ...prev,
+                id: savedReservation.id,
+                created: savedReservation.created
+            }))
         } catch (error) {
             console.error('Error submitting reservation:', error)
             toast.error('Error al enviar la reserva. Inténtalo de nuevo más tarde.')
