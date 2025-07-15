@@ -3,6 +3,14 @@ import { SiteContentData } from '@/types'
 import Link from 'next/link'
 import { Button } from './ui/button'
 import Image from 'next/image'
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from '@/components/ui/sheet'
+import { Menu } from 'lucide-react'
 
 interface HeaderProps {
     siteContent: SiteContentData
@@ -33,12 +41,52 @@ const Header = ({ siteContent }: HeaderProps) => {
                         </Link>
                     ))}
                 </nav>
-                <Button
-                    className="bg-brand-primary hover:bg-brand-primary/90 text-white px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300"
-                    asChild
-                >
-                    <Link href={siteContent.cta.link}>{siteContent.cta.button}</Link>
-                </Button>
+                <div className="hidden md:block">
+                    <Button
+                        className="bg-brand-primary hover:bg-brand-primary/90 text-white px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                        asChild
+                    >
+                        <Link href={siteContent.cta.link}>
+                            {siteContent.cta.button}
+                        </Link>
+                    </Button>
+                </div>
+                <div className="md:hidden">
+                    <Sheet>
+                        <SheetTrigger asChild>
+                            <Button variant="outline" size="icon">
+                                <Menu className="h-6 w-6" />
+                                <span className="sr-only">Abrir menú</span>
+                            </Button>
+                        </SheetTrigger>
+                        <SheetContent side="right">
+                            <SheetHeader>
+                                <SheetTitle>Menú</SheetTitle>
+                            </SheetHeader>
+                            <div className="grid gap-4 py-6">
+                                {siteContent.navigation.links.map(
+                                    (item, index) => (
+                                        <Link
+                                            key={index}
+                                            href={item.href}
+                                            className="text-slate-700 hover:text-brand-primary transition-colors font-medium"
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    )
+                                )}
+                                <Button
+                                    className="bg-brand-primary hover:bg-brand-primary/90 text-white px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                                    asChild
+                                >
+                                    <Link href={siteContent.cta.link}>
+                                        {siteContent.cta.button}
+                                    </Link>
+                                </Button>
+                            </div>
+                        </SheetContent>
+                    </Sheet>
+                </div>
             </div>
         </header>
     )

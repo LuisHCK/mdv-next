@@ -51,7 +51,13 @@ export default function MemoriasDeVidaLanding() {
                 className="relative h-screen flex items-center justify-center overflow-hidden"
             >
                 <div className="absolute inset-0 z-0">
-                    <video autoPlay loop muted className="w-full h-full object-cover">
+                    <video
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                    >
                         <source src="/hero-video.mp4" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
@@ -142,7 +148,7 @@ export default function MemoriasDeVidaLanding() {
                                     width={320}
                                     height={480}
                                     className={cn(
-                                        "object-cover w-full h-100 group-hover:scale-110 transition-transform duration-500",
+                                        'object-cover w-full h-100 group-hover:scale-110 transition-transform duration-500',
                                         image.classnames
                                     )}
                                 />
