@@ -1,30 +1,48 @@
-# Memorias de vida
+# Memorias de Vida - Photo Studio
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+Welcome to the official repository for the Memorias de Vida website, a professional photo studio. This project is designed to showcase our work, manage client sessions, and streamline the reservation process.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/luisjcenteno17-4454s-projects/v0-memorias-de-vida)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/PEEjk3EGgIo)
+## ✨ Main Features
 
-## Overview
+Based on the project structure, here are the core features:
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+*   **📷 Photo Gallery:** A beautiful gallery to display photo sessions. Clients can view their private session galleries.
+*   **📦 Service Packages:** Clear presentation of different photography packages available.
+*   **📅 Reservation System:** An integrated form for clients to book their photo sessions.
+*   **🔒 Admin Dashboard:** A secure area for administrators to manage sessions, clients, and reservations.
 
-## Deployment
+## 🚀 Project Architecture & Stack
 
-Your project is live at:
+This project is built with a modern web stack, focusing on performance and developer experience.
 
-**[https://vercel.com/luisjcenteno17-4454s-projects/v0-memorias-de-vida](https://vercel.com/luisjcenteno17-4454s-projects/v0-memorias-de-vida)**
+*   **Framework:** [Next.js](https://nextjs.org/) (using the App Router)
+*   **Language:** [TypeScript](https://www.typescriptlang.org/)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
+*   **Backend & DB:** [PocketBase](https://pocketbase.io/)
+*   **Forms:** [React Hook Form](https://react-hook-form.com/)
 
-## Build your app
+The architecture follows the standard Next.js App Router paradigm, with a clear separation of pages, components, and backend-related logic.
 
-Continue building your app on:
+## 🏁 Getting Started
 
-**[https://v0.dev/chat/projects/PEEjk3EGgIo](https://v0.dev/chat/projects/PEEjk3EGgIo)**
+To get the development server running locally, follow these simple steps:
 
-## How It Works
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/LuisHCK/mdv-next.git
+    cd mdv-next
+    ```
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or yarn install or pnpm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
