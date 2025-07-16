@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import './globals.css'
 import { Toaster } from '@/components/ui/sonner'
+import Script from 'next/script'
+import './globals.css'
 
 const siteConfig = {
     name: 'Memorias de Vida',
@@ -87,6 +88,13 @@ export default function RootLayout({
                         })
                     }}
                 />
+                {process.env.NODE_ENV === 'production' && (
+                    <Script
+                        defer
+                        src="https://umami.memoriasdevidafoto.com/script.js"
+                        data-website-id="1ade7101-98f5-4946-aa6d-3e87687e54fe"
+                    />
+                )}
             </head>
             <body>
                 <Toaster position="top-center" />
