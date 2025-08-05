@@ -6,7 +6,9 @@ import {
     updateReservation,
     loginUser as loginUserHandler,
     getReservations,
-    updateAdminReservation as updateAdminReservationHandler
+    updateAdminReservation as updateAdminReservationHandler,
+    getPhotoSession as getPhotoSessionHandler,
+    getPhotoSessions
 } from '@/lib/pocketbase'
 import { Reservation, ReservationFormData } from '@/types'
 import { parse } from 'date-fns'
@@ -76,11 +78,11 @@ export async function loginUser(email: string, password: string): Promise<boolea
     }
 }
 
-export async function getAdminReservations() {
+export async function getAdminReservations({ limit }: { limit: number }): Promise<Reservation[]> {
     try {
         const cookieStore = await cookies()
         const token = cookieStore.get('auth_token')?.value || ''
-        const response = await getReservations(token)
+        const response = await getReservations(token, limit)
         return response
     } catch (error) {
         console.error('Error fetching admin reservations:', error)
@@ -100,5 +102,29 @@ export async function updateAdminReservation(
     } catch (error) {
         console.error('Error updating admin reservation:', error)
         return null
+    }
+}
+
+export async function getPhotoSession(id: string) {
+    try {
+        const cookieStore = await cookies()
+        const token = cookieStore.get('auth_token')?.value || ''
+        const response = await getPhotoSessionHandler(id, token)
+        return response
+    } catch (error) {
+        console.error('Error updating admin reservation:', error)
+        return null
+    }
+}
+
+export async function getAdminPhotoSessions({ limit }: { limit?: number }) {
+    try {
+        const cookieStore = await cookies()
+        const token = cookieStore.get('auth_token')?.value || ''
+        const response = await getPhotoSessions(token, limit)
+        return response
+    } catch (error) {
+        console.error('Error updating admin reservation:', error)
+        return []
     }
 }

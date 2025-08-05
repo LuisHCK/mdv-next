@@ -43,3 +43,17 @@ export const getColorClasses = (color: string, variant: 'bg' | 'text' | 'border'
     }
     return colorMap[color as keyof typeof colorMap]?.[variant] || colorMap.rose[variant]
 }
+
+
+/**
+ * Generates a URL for accessing an asset file stored in a PocketBase collection.
+ *
+ * @param collectionId - The ID of the PocketBase collection containing the asset.
+ * @param recordId - The ID of the record within the collection.
+ * @param filename - The name of the asset file.
+ * @returns The full URL to the asset file, or a placeholder image path if the filename is not provided.
+ */
+export const getPocketBaseAssetUrl = (collectionId: string, recordId: string, filename: string): string => {
+    if (!filename) return '/placeholder.svg'
+    return `${process.env.API_URL}/api/files/${collectionId}/${recordId}/${filename}`
+}

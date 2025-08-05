@@ -106,6 +106,23 @@ export interface Brand {
     tagline: string
 }
 
+// --- upload session types ---
+export interface UploadedFile {
+    id: string
+    file: File
+    preview: string
+    status: 'pending' | 'uploading' | 'success' | 'error'
+    progress: number
+}
+
+export interface SessionData {
+    clientName: string
+    sessionDate: string
+    location: string
+    packageType: string
+    description: string
+}
+
 export interface NavigationItem {
     label: string
     href: string
@@ -226,7 +243,6 @@ interface Reservation {
     updated?: string // Optional field for updated date
 }
 
-
 interface ReservationFormData {
     id?: string // Optional ID for existing reservations
     date: string
@@ -235,7 +251,7 @@ interface ReservationFormData {
     tier: string
     name: string
     phone: string
-    message: string,
+    message: string
     created?: string // Optional field for created date
 }
 
@@ -252,3 +268,16 @@ export interface User {
     updated: string
 }
 
+export interface PublishedPhotoSession {
+    collectionId: string
+    collectionName: string
+    id: string
+    client: string
+    phone: string
+    tier_id: string // Relation to PackageTier record ID
+    package_id: string // Relation to Package record ID
+    visible: boolean
+    photos: string[] // Array of photo filenames
+    created: string
+    updated: string
+}

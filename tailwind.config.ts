@@ -56,7 +56,7 @@ const config: Config = {
         brand: {
           primary: "#cdad8e",
           secondary: "#fff5ee",
-          dark: "#000000",
+          dark: "#8c6d4b",
         },
       },
       borderRadius: {
@@ -64,9 +64,6 @@ const config: Config = {
         md: "0",
         sm: "0",
         none: "0",
-        sm: "0",
-        md: "0",
-        lg: "0",
         xl: "0",
         "2xl": "0",
         "3xl": "0",

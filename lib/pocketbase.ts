@@ -1,6 +1,7 @@
-import { Package, PackageTier, Reservation, User } from '@/types'
+import { Package, PackageTier, PublishedPhotoSession, Reservation, User } from '@/types'
 import PocketBase, { RecordAuthResponse } from 'pocketbase'
 import Cookies from 'js-cookie'
+import { getPocketBaseAssetUrl } from './utils'
 
 const pb = new PocketBase(process.env.API_URL)
 pb.autoCancellation(false)
@@ -93,7 +94,7 @@ export const getProfile = async (token: string): Promise<User | null> => {
         const profile = await pb.collection('users').getList<User>(1, 1)
 
         if (profile.items.length === 0) {
-            throw new Error('Profile not found')
+            return null
         }
         return profile.items[0]
     } catch (error) {
@@ -102,13 +103,14 @@ export const getProfile = async (token: string): Promise<User | null> => {
     }
 }
 
-export const getReservations = async (token: string): Promise<Reservation[]> => {
+export const getReservations = async (token: string, limit?: number): Promise<Reservation[]> => {
     try {
         pb.authStore.save(token)
         const response = await pb
             .collection<Reservation>('reservations')
-            .getFullList({ sort: '-created' })
-        return response
+            .getList(1, limit, { sort: '-created' })
+
+        return response.items
     } catch (error) {
         console.error('Error fetching reservations:', error)
         throw error
@@ -129,5 +131,66 @@ export const updateAdminReservation = async (
     } catch (error) {
         console.error('Error updating reservation status:', error)
         throw error
+    }
+}
+
+export const getPhotoSessions = async (
+    token: string,
+    limit?: number
+): Promise<PublishedPhotoSession[]> => {
+    try {
+        pb.authStore.save(token)
+        const response = await pb
+            .collection<PublishedPhotoSession>('sessions')
+            .getList<PublishedPhotoSession>(1, limit, { sort: '-created' })
+
+        return response.items.map((session) => ({
+            ...session,
+            photos: session.photos.map((filename) =>
+                getPocketBaseAssetUrl(session.collectionId, session.id, filename)
+            )
+        }))
+    } catch (error) {
+        console.error('Error fetching photo sessions:', error)
+        throw error
+    }
+}
+
+export const getPhotoSession = async (
+    id: string,
+    token: string
+): Promise<PublishedPhotoSession | null> => {
+    try {
+        pb.authStore.save(token)
+        const response = await pb.collection('sessions').getOne<PublishedPhotoSession>(id)
+        return {
+            ...response,
+            photos: response.photos.map((filename) =>
+                getPocketBaseAssetUrl(response.collectionId, response.id, filename)
+            )
+        }
+    } catch (error) {
+        console.error('Error fetching photo session:', error)
+        return null
+    }
+}
+
+export const createPhotoSession = async (
+    data: Omit<PublishedPhotoSession, 'id' | 'photos'>,
+    files: File[],
+    token: string
+): Promise<PublishedPhotoSession | null> => {
+    try {
+        pb.authStore.save(token)
+
+        const createdSession = await pb.collection('sessions').create<PublishedPhotoSession>({
+            ...data,
+            photos: files
+        })
+
+        return createdSession
+    } catch (error) {
+        console.error('Error creating photo session:', error)
+        return null
     }
 }

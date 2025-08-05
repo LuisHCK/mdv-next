@@ -39,7 +39,7 @@ export default function AdminView({ packages }: { packages: Package[] }) {
         const fetchReservations = async () => {
             setIsLoading(true)
             try {
-                const response = await getAdminReservations()
+                const response = await getAdminReservations({ limit: 100 })
                 setReservations(response)
             } catch (error) {
                 console.error('Error fetching reservations:', error)
@@ -156,25 +156,22 @@ export default function AdminView({ packages }: { packages: Package[] }) {
                 </div>
 
                 {/* Filter Buttons */}
-                <div className="mb-6 flex gap-4">
+                <div className="mb-6 flex gap-4 overflow-x-auto md:overflow-x-visible">
                     <Button
                         variant={filter === 'pending' ? 'default' : 'outline'}
                         onClick={() => setFilter('pending')}
-                        className={filter === 'pending' ? 'bg-primary text-gray-100' : ''}
                     >
                         Pendientes ({pendingCount})
                     </Button>
                     <Button
                         variant={filter === 'all' ? 'default' : 'outline'}
                         onClick={() => setFilter('all')}
-                        className={filter === 'all' ? 'bg-primary text-gray-100' : ''}
                     >
                         Todas ({totalCount})
                     </Button>
                     <Button
                         variant={filter === 'approved' ? 'default' : 'outline'}
                         onClick={() => setFilter('approved')}
-                        className={filter === 'approved' ? 'bg-primary text-gray-100' : ''}
                     >
                         Aprobadas ({approvedCount})
                     </Button>
