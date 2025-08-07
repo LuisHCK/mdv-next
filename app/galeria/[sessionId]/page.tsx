@@ -1,18 +1,22 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Camera, Calendar, MapPin, User, ArrowLeft } from 'lucide-react'
+import { Camera, Calendar, User, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 // Import data
 import siteContent from '@/data/site-content.json'
 import Header from '@/components/header'
-import { getPhotoSession } from '@/lib/pocketbase'
+import { getPackages, getPhotoSession } from '@/lib/pocketbase'
 import PhotoGallery from '@/components/photo-gallery'
+import { Heart } from 'lucide-react'
 
 export default async function GaleriaPage({ params }: { params: Promise<{ sessionId: string }> }) {
     // Find the session data
     const { sessionId } = await params
     const session = await getPhotoSession(sessionId)
+    const packages = await getPackages()
+
+    const sessionPackage = packages.find((pkg) => pkg.id === session?.package_id)
 
     if (!session) {
         return (
@@ -48,7 +52,7 @@ export default async function GaleriaPage({ params }: { params: Promise<{ sessio
                         </Link>
                     </div>
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                        <Card className="border-0 bg-gradient-to-br from-brand-secondary to-white shadow-sm">
+                        <Card className="border-0 bg-gradient-to-br from-brand-secondary to-gray-100 shadow-sm">
                             <CardContent className="p-6">
                                 <div className="flex items-center space-x-3">
                                     <User className="h-8 w-8 text-brand-primary" />
@@ -56,14 +60,11 @@ export default async function GaleriaPage({ params }: { params: Promise<{ sessio
                                         <h3 className="font-semibold text-brand-dark">
                                             {session?.client}
                                         </h3>
-                                        <p className="text-sm text-slate-600">
-                                            {session?.package_id}
-                                        </p>
                                     </div>
                                 </div>
                             </CardContent>
                         </Card>
-                        <Card className="border-0 bg-gradient-to-br from-brand-secondary to-white shadow-sm">
+                        <Card className="border-0 bg-gradient-to-br from-brand-secondary to-gray-100 shadow-sm">
                             <CardContent className="p-6">
                                 <div className="flex items-center space-x-3">
                                     <Calendar className="h-8 w-8 text-brand-primary" />
@@ -76,18 +77,20 @@ export default async function GaleriaPage({ params }: { params: Promise<{ sessio
                                 </div>
                             </CardContent>
                         </Card>
-                        <Card className="border-0 bg-gradient-to-br from-brand-secondary to-white shadow-sm">
+                        <Card className="border-0 bg-gradient-to-br from-brand-secondary to-gray-100 shadow-sm">
                             <CardContent className="p-6">
                                 <div className="flex items-center space-x-3">
-                                    <MapPin className="h-8 w-8 text-brand-primary" />
+                                    <Heart className="h-8 w-8 text-brand-primary" />
                                     <div>
-                                        <h3 className="font-semibold text-brand-dark">Ubicación</h3>
-                                        <p className="text-sm text-slate-600">{session.id}</p>
+                                        <h3 className="font-semibold text-brand-dark">Paquete</h3>
+                                        <p className="text-sm text-slate-600">
+                                            {sessionPackage?.name}
+                                        </p>
                                     </div>
                                 </div>
                             </CardContent>
                         </Card>
-                        <Card className="border-0 bg-gradient-to-br from-brand-secondary to-white shadow-sm">
+                        <Card className="border-0 bg-gradient-to-br from-brand-secondary to-gray-100 shadow-sm">
                             <CardContent className="p-6">
                                 <div className="flex items-center space-x-3">
                                     <Camera className="h-8 w-8 text-brand-primary" />

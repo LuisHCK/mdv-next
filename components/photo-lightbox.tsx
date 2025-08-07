@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight, Download, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface Photo {
     id: string
@@ -78,26 +79,23 @@ export function PhotoLightbox({
             {/* Header */}
             <div className="absolute left-0 right-0 top-0 z-10 bg-gradient-to-b from-black/50 to-transparent p-4">
                 <div className="flex flex-col items-center justify-between text-white md:flex-row">
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center pt-6">
                         <span className="text-sm font-medium">
                             {currentIndex + 1} de {photos.length}
                         </span>
-                        <span className="text-sm text-white/70">{currentPhoto}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <Button variant="ghost" size="sm" className="text-white hover:bg-white/20">
-                            <Download className="h-5 w-5" />
-                        </Button>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={onClose}
-                            className="text-white hover:bg-white/20"
-                        >
-                            <X className="h-5 w-5" />
-                        </Button>
                     </div>
                 </div>
+            </div>
+
+            <div className="absolute right-4 top-4 z-10">
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={onClose}
+                    className="text-white hover:bg-white/20"
+                >
+                    <X className="h-16 w-16" strokeWidth={4} />
+                </Button>
             </div>
 
             {/* Navigation Buttons */}
@@ -108,7 +106,7 @@ export function PhotoLightbox({
                 disabled={currentIndex === 0}
                 className="absolute left-4 top-1/2 z-10 -translate-y-1/2 text-white hover:bg-white/20 disabled:opacity-30"
             >
-                <ChevronLeft className="h-8 w-8" />
+                <ChevronLeft className="h-12 w-12" strokeWidth={4} />
             </Button>
 
             <Button
@@ -116,14 +114,14 @@ export function PhotoLightbox({
                 size="lg"
                 onClick={onNext}
                 disabled={currentIndex === photos.length - 1}
-                className="absolute right-4 top-1/2 z-10 -translate-y-1/2 text-white hover:bg-white/20 disabled:opacity-30"
+                className="absolute right-4 top-1/2 z-10 -translate-y-1/2 text-white outline-none hover:bg-white/20 disabled:opacity-30"
             >
-                <ChevronRight className="h-8 w-8" />
+                <ChevronRight className="h-12 w-12" strokeWidth={4} />
             </Button>
 
             {/* Main Image */}
-            <div className="flex h-full items-center justify-center p-8 pb-24 pt-20">
-                <div className="relative max-h-full max-w-7xl">
+            <div className="flex h-full items-center justify-center p-8 pb-32 pt-8">
+                <div className="relative max-h-full max-w-7xl md:max-w-4xl">
                     <Image
                         src={currentPhoto || '/placeholder.svg'}
                         alt={currentPhoto}
@@ -144,13 +142,22 @@ export function PhotoLightbox({
             {/* Footer */}
             <div className="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-black/50 to-transparent p-4">
                 <div className="text-center text-white">
-                    <h3 className="mb-1 text-lg font-semibold">{currentPhoto}</h3>
+                    <Button className="px-6 py-3 text-lg font-bold" size="lg" asChild>
+                        <Link
+                            href={`${currentPhoto}?download=1`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <Download className="mr-2 h-5 w-5" />
+                            Descargar
+                        </Link>
+                    </Button>
                 </div>
             </div>
 
             {/* Thumbnail Strip */}
             <div className="absolute bottom-20 left-0 right-0 z-10">
-                <div className="flex justify-center space-x-2 overflow-x-auto px-4">
+                <div className="flex justify-center space-x-2 overflow-x-auto overflow-y-hidden px-4">
                     {photos
                         .slice(Math.max(0, currentIndex - 5), currentIndex + 6)
                         .map((photo, index) => {

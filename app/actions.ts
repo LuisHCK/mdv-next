@@ -8,11 +8,25 @@ import {
     getReservations,
     updateAdminReservation as updateAdminReservationHandler,
     getPhotoSession as getPhotoSessionHandler,
-    getPhotoSessions
+    getPhotoSessions,
+    createPhotoSession,
+    getPackages,
+    updatePhotoSessionHandler,
+    deletePhotoSessionHandler
 } from '@/lib/pocketbase'
-import { Reservation, ReservationFormData } from '@/types'
+import { PublishedPhotoSession, Reservation, ReservationFormData } from '@/types'
 import { parse } from 'date-fns'
 import { addDays } from 'date-fns'
+
+export const getPackageList = async () => {
+    try {
+        const response = await getPackages()
+        return response
+    } catch (error) {
+        console.error('Error fetching package list:', error)
+        return []
+    }
+}
 
 export async function submitReservation(formData: ReservationFormData) {
     const { date, time } = formData
@@ -78,10 +92,15 @@ export async function loginUser(email: string, password: string): Promise<boolea
     }
 }
 
+// Helper function to get the authentication token from cookies
+async function getAuthToken(): Promise<string> {
+    const cookieStore = await cookies()
+    return cookieStore.get('auth_token')?.value || ''
+}
+
 export async function getAdminReservations({ limit }: { limit: number }): Promise<Reservation[]> {
     try {
-        const cookieStore = await cookies()
-        const token = cookieStore.get('auth_token')?.value || ''
+        const token = await getAuthToken()
         const response = await getReservations(token, limit)
         return response
     } catch (error) {
@@ -95,8 +114,7 @@ export async function updateAdminReservation(
     data: Partial<Reservation>
 ): Promise<Reservation | null> {
     try {
-        const cookieStore = await cookies()
-        const token = cookieStore.get('auth_token')?.value || ''
+        const token = await getAuthToken()
         const response = await updateAdminReservationHandler(id, data, token)
         return response
     } catch (error) {
@@ -107,8 +125,7 @@ export async function updateAdminReservation(
 
 export async function getPhotoSession(id: string) {
     try {
-        const cookieStore = await cookies()
-        const token = cookieStore.get('auth_token')?.value || ''
+        const token = await getAuthToken()
         const response = await getPhotoSessionHandler(id, token)
         return response
     } catch (error) {
@@ -119,12 +136,44 @@ export async function getPhotoSession(id: string) {
 
 export async function getAdminPhotoSessions({ limit }: { limit?: number }) {
     try {
-        const cookieStore = await cookies()
-        const token = cookieStore.get('auth_token')?.value || ''
+        const token = await getAuthToken()
         const response = await getPhotoSessions(token, limit)
         return response
     } catch (error) {
         console.error('Error updating admin reservation:', error)
         return []
+    }
+}
+
+export async function uploadNewPhotoSession(data: Partial<PublishedPhotoSession>, photos: File[]) {
+    try {
+        const token = await getAuthToken()
+        const response = await createPhotoSession(data, photos, token)
+        return response
+    } catch (error) {
+        console.error('Error uploading new photo session:', error)
+        return null
+    }
+}
+
+export async function updatePhotoSession(data: Partial<PublishedPhotoSession>) {
+    try {
+        const token = await getAuthToken()
+        const response = await updatePhotoSessionHandler(data, token)
+        return response
+    } catch (error) {
+        console.error('Error updating photo session:', error)
+        return null
+    }
+}
+
+export async function deletePhotoSession(id: string) {
+    try {
+        const token = await getAuthToken()
+        const response = await deletePhotoSessionHandler(id, token)
+        return response
+    } catch (error) {
+        console.error('Error deleting photo session:', error)
+        return null
     }
 }

@@ -158,10 +158,13 @@ export const getPhotoSessions = async (
 
 export const getPhotoSession = async (
     id: string,
-    token: string
+    token?: string
 ): Promise<PublishedPhotoSession | null> => {
     try {
-        pb.authStore.save(token)
+        if (token) {
+            pb.authStore.save(token)
+        }
+
         const response = await pb.collection('sessions').getOne<PublishedPhotoSession>(id)
         return {
             ...response,
@@ -176,7 +179,7 @@ export const getPhotoSession = async (
 }
 
 export const createPhotoSession = async (
-    data: Omit<PublishedPhotoSession, 'id' | 'photos'>,
+    data: Partial<PublishedPhotoSession>,
     files: File[],
     token: string
 ): Promise<PublishedPhotoSession | null> => {
@@ -192,5 +195,38 @@ export const createPhotoSession = async (
     } catch (error) {
         console.error('Error creating photo session:', error)
         return null
+    }
+}
+
+export const updatePhotoSessionHandler = async (
+    data: Partial<PublishedPhotoSession>,
+    token: string
+): Promise<PublishedPhotoSession | null> => {
+    try {
+        pb.authStore.save(token)
+
+        if (!data.id) {
+            throw new Error('Session ID is required for update')
+        }
+
+        const updatedSession = await pb
+            .collection('sessions')
+            .update<PublishedPhotoSession>(data.id, data)
+
+        return updatedSession
+    } catch (error) {
+        console.error('Error updating photo session:', error)
+        return null
+    }
+}
+
+export const deletePhotoSessionHandler = async (id: string, token: string): Promise<boolean> => {
+    try {
+        pb.authStore.save(token)
+        await pb.collection('sessions').delete(id)
+        return true
+    } catch (error) {
+        console.error('Error deleting photo session:', error)
+        return false
     }
 }

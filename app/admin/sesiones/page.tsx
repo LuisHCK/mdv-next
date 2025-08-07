@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -9,125 +9,51 @@ import { Calendar, MapPin, Package, Search, Eye, Trash2, Edit, ImageIcon, User }
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 import Link from 'next/link'
-
-// Mock data - in real app this would come from your database
-const mockSessions = [
-    {
-        id: 'session-001',
-        clientName: 'Familia González',
-        sessionType: 'Retrato Familiar',
-        packageType: 'Aire Libre',
-        date: '2024-03-15',
-        location: 'Parque Central',
-        photographer: 'Ana Martínez',
-        totalPhotos: 45,
-        uploadDate: '2024-03-22T10:30:00Z',
-        status: 'published',
-        thumbnails: [
-            '/placeholder.svg?height=100&width=100',
-            '/placeholder.svg?height=100&width=100',
-            '/placeholder.svg?height=100&width=100'
-        ]
-    },
-    {
-        id: 'session-002',
-        clientName: 'María Rodríguez',
-        sessionType: 'Perfil Profesional',
-        packageType: 'Perfil Profesional',
-        date: '2024-03-18',
-        location: 'Estudio',
-        photographer: 'Carlos Mendez',
-        totalPhotos: 25,
-        uploadDate: '2024-03-20T14:15:00Z',
-        status: 'draft',
-        thumbnails: [
-            '/placeholder.svg?height=100&width=100',
-            '/placeholder.svg?height=100&width=100'
-        ]
-    },
-    {
-        id: 'session-003',
-        clientName: 'Pequeño Alejandro',
-        sessionType: 'Infantil',
-        packageType: 'Infantil - Paquete 2',
-        date: '2024-03-20',
-        location: 'Estudio',
-        photographer: 'Ana Martínez',
-        totalPhotos: 32,
-        uploadDate: '2024-03-25T09:45:00Z',
-        status: 'published',
-        thumbnails: [
-            '/placeholder.svg?height=100&width=100',
-            '/placeholder.svg?height=100&width=100',
-            '/placeholder.svg?height=100&width=100',
-            '/placeholder.svg?height=100&width=100'
-        ]
-    },
-    {
-        id: 'session-004',
-        clientName: 'Cumpleaños de Sofia',
-        sessionType: 'Celebrate',
-        packageType: 'Celebrate - Paquete 1',
-        date: '2024-03-22',
-        location: 'Estudio',
-        photographer: 'Carlos Mendez',
-        totalPhotos: 18,
-        uploadDate: '2024-03-24T16:20:00Z',
-        status: 'published',
-        thumbnails: [
-            '/placeholder.svg?height=100&width=100',
-            '/placeholder.svg?height=100&width=100'
-        ]
-    },
-    {
-        id: 'session-005',
-        clientName: 'Pareja Martínez',
-        sessionType: 'Para el Recuerdo',
-        packageType: 'Para el Recuerdo',
-        date: '2024-03-25',
-        location: 'Estudio',
-        photographer: 'Ana Martínez',
-        totalPhotos: 15,
-        uploadDate: '2024-03-26T11:10:00Z',
-        status: 'draft',
-        thumbnails: ['/placeholder.svg?height=100&width=100']
-    }
-]
+import type { PublishedPhotoSession } from '@/types'
+import { deletePhotoSession, getAdminPhotoSessions, updatePhotoSession } from '@/app/actions'
+import { toast } from 'sonner'
+import ConfirmDelete from '@/components/admin/confirm-delete'
 
 export default function SessionsPage() {
-    const [sessions, setSessions] = useState(mockSessions)
+    const [isLoading, setIsLoading] = useState(true)
+    const [sessions, setSessions] = useState<PublishedPhotoSession[]>([])
     const [searchTerm, setSearchTerm] = useState('')
     const [statusFilter, setStatusFilter] = useState<'all' | 'published' | 'draft'>('all')
 
     const filteredSessions = sessions.filter((session) => {
         const matchesSearch =
-            session.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            session.sessionType.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            session.packageType.toLowerCase().includes(searchTerm.toLowerCase())
+            session.client.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            session.created.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            session.package_id.toLowerCase().includes(searchTerm.toLowerCase())
 
-        const matchesStatus = statusFilter === 'all' || session.status === statusFilter
+        const matchesStatus =
+            statusFilter === 'all' || session.visible === (statusFilter === 'published')
 
         return matchesSearch && matchesStatus
     })
 
-    const handleDelete = (id: string) => {
-        if (
-            confirm(
-                '¿Estás seguro de que quieres eliminar esta sesión? Esta acción no se puede deshacer.'
+    const toggleStatus = async (id: string) => {
+        const currentSession = sessions.find((s) => s.id === id)
+        const updatedSession = await updatePhotoSession({ id, visible: !currentSession?.visible })
+
+        if (updatedSession) {
+            setSessions((prev) =>
+                prev.map((session) =>
+                    session.id === id ? { ...session, visible: !session.visible } : session
+                )
             )
-        ) {
-            setSessions((prev) => prev.filter((session) => session.id !== id))
+            toast.success(
+                `Sesión ${updatedSession.visible ? 'publicada' : 'despublicada'} exitosamente`
+            )
+        } else {
+            toast.error('Error al actualizar el estado de la sesión. Inténtalo de nuevo.')
         }
     }
 
-    const toggleStatus = (id: string) => {
-        setSessions((prev) =>
-            prev.map((session) =>
-                session.id === id
-                    ? { ...session, status: session.status === 'published' ? 'draft' : 'published' }
-                    : session
-            )
-        )
+    const onConfirmDelete = async (id: string) => {
+        await deletePhotoSession(id)
+        setSessions((prev) => prev.filter((session) => session.id !== id))
+        toast.success('Sesión eliminada exitosamente')
     }
 
     const getStatusBadge = (status: string) => {
@@ -155,10 +81,19 @@ export default function SessionsPage() {
         }
     }
 
-    const publishedCount = sessions.filter((s) => s.status === 'published').length
-    const draftCount = sessions.filter((s) => s.status === 'draft').length
+    const publishedCount = sessions.filter((s) => s.visible).length
+    const draftCount = sessions.filter((s) => !s.visible).length
     const totalCount = sessions.length
-    const totalPhotos = sessions.reduce((sum, session) => sum + session.totalPhotos, 0)
+    const totalPhotos = sessions.reduce((sum, session) => sum + session.photos.length, 0)
+
+    useEffect(() => {
+        const fetchPublishedSessions = async () => {
+            const response = await getAdminPhotoSessions({ limit: 100 })
+            setSessions(response)
+            setIsLoading(false)
+        }
+        fetchPublishedSessions()
+    }, [])
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -257,7 +192,14 @@ export default function SessionsPage() {
 
             {/* Sessions List */}
             <div className="space-y-6">
-                {filteredSessions.length === 0 ? (
+                {isLoading && (
+                    <Card>
+                        <CardContent className="p-8 text-center">
+                            <p className="text-gray-500">Cargando sesiones...</p>
+                        </CardContent>
+                    </Card>
+                )}
+                {filteredSessions.length === 0 && !isLoading ? (
                     <Card>
                         <CardContent className="p-8 text-center">
                             <ImageIcon className="mx-auto mb-4 h-12 w-12 text-gray-400" />
@@ -277,7 +219,7 @@ export default function SessionsPage() {
                                     {/* Thumbnails */}
                                     <div className="lg:col-span-1">
                                         <div className="grid grid-cols-2 gap-2">
-                                            {session.thumbnails.slice(0, 4).map((thumb, index) => (
+                                            {session.photos.slice(0, 4).map((thumb, index) => (
                                                 <div
                                                     key={index}
                                                     className="aspect-square overflow-hidden bg-gray-100"
@@ -289,10 +231,10 @@ export default function SessionsPage() {
                                                     />
                                                 </div>
                                             ))}
-                                            {session.thumbnails.length > 4 && (
+                                            {session.photos.length > 4 && (
                                                 <div className="flex aspect-square items-center justify-center bg-gray-100">
                                                     <span className="text-sm text-gray-500">
-                                                        +{session.thumbnails.length - 4}
+                                                        +{session.photos.length - 4}
                                                     </span>
                                                 </div>
                                             )}
@@ -303,51 +245,47 @@ export default function SessionsPage() {
                                     <div className="space-y-4 lg:col-span-2">
                                         <div className="flex items-center justify-between">
                                             <h3 className="text-xl font-semibold text-black">
-                                                {session.clientName}
+                                                {session.client}
                                             </h3>
-                                            {getStatusBadge(session.status)}
+                                            {getStatusBadge(
+                                                session.visible ? 'published' : 'draft'
+                                            )}
                                         </div>
 
                                         <div className="grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
                                             <div className="flex items-center gap-2">
                                                 <User className="h-4 w-4 text-brand-primary" />
-                                                <span>{session.sessionType}</span>
+                                                <span>{session.client}</span>
                                             </div>
 
                                             <div className="flex items-center gap-2">
                                                 <Package className="h-4 w-4 text-brand-primary" />
-                                                <span>{session.packageType}</span>
+                                                <span>{session.package_id}</span>
                                             </div>
 
                                             <div className="flex items-center gap-2">
                                                 <Calendar className="h-4 w-4 text-brand-primary" />
                                                 <span>
-                                                    {format(new Date(session.date), 'dd MMM yyyy', {
-                                                        locale: es
-                                                    })}
+                                                    {format(
+                                                        new Date(session.created),
+                                                        'dd MMM yyyy',
+                                                        {
+                                                            locale: es
+                                                        }
+                                                    )}
                                                 </span>
                                             </div>
 
                                             <div className="flex items-center gap-2">
-                                                <MapPin className="h-4 w-4 text-brand-primary" />
-                                                <span>{session.location}</span>
-                                            </div>
-
-                                            <div className="flex items-center gap-2">
                                                 <ImageIcon className="h-4 w-4 text-brand-primary" />
-                                                <span>{session.totalPhotos} fotografías</span>
-                                            </div>
-
-                                            <div className="flex items-center gap-2">
-                                                <User className="h-4 w-4 text-brand-primary" />
-                                                <span>{session.photographer}</span>
+                                                <span>{session.photos.length} fotografías</span>
                                             </div>
                                         </div>
 
                                         <div className="text-xs text-gray-500">
                                             Subida:{' '}
                                             {format(
-                                                new Date(session.uploadDate),
+                                                new Date(session.created),
                                                 'dd MMM yyyy, HH:mm',
                                                 { locale: es }
                                             )}
@@ -357,10 +295,7 @@ export default function SessionsPage() {
                                     {/* Actions */}
                                     <div className="flex flex-col gap-3 lg:col-span-1">
                                         <Link href={`/galeria/${session.id}`}>
-                                            <Button
-                                                variant="outline"
-                                                className="w-full"
-                                            >
+                                            <Button variant="outline" className="w-full">
                                                 <Eye className="mr-2 h-4 w-4" />
                                                 Ver Galería
                                             </Button>
@@ -370,12 +305,12 @@ export default function SessionsPage() {
                                             onClick={() => toggleStatus(session.id)}
                                             variant="outline"
                                             className={
-                                                session.status === 'published'
+                                                session.visible
                                                     ? 'border-yellow-200 text-yellow-700 hover:bg-yellow-50'
                                                     : 'border-green-200 text-green-700 hover:bg-green-50'
                                             }
                                         >
-                                            {session.status === 'published' ? (
+                                            {session.visible ? (
                                                 <>
                                                     <Edit className="mr-2 h-4 w-4" />
                                                     Despublicar
@@ -388,14 +323,23 @@ export default function SessionsPage() {
                                             )}
                                         </Button>
 
-                                        <Button
-                                            onClick={() => handleDelete(session.id)}
-                                            variant="outline"
-                                            className="border-red-200 text-red-600 hover:bg-red-50"
-                                        >
-                                            <Trash2 className="mr-2 h-4 w-4" />
-                                            Eliminar
-                                        </Button>
+                                        <ConfirmDelete
+                                            title="Eliminar sesión"
+                                            message={
+                                                <>
+                                                    <span>
+                                                        ¿Estás seguro de que quieres eliminar esta
+                                                    </span>
+                                                    <br />
+                                                    <span>
+                                                        sesión? Esta acción no se puede deshacer.
+                                                    </span>
+                                                </>
+                                            }
+                                            onDelete={() => onConfirmDelete(session.id)}
+                                            buttonLabel="Eliminar"
+                                            buttonClassName="border-red-200 text-red-600 hover:bg-red-50"
+                                        />
                                     </div>
                                 </div>
                             </CardContent>
