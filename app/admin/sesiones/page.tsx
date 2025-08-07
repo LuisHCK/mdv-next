@@ -13,6 +13,7 @@ import type { PublishedPhotoSession } from '@/types'
 import { deletePhotoSession, getAdminPhotoSessions, updatePhotoSession } from '@/app/actions'
 import { toast } from 'sonner'
 import ConfirmDelete from '@/components/admin/confirm-delete'
+import { Copy } from 'lucide-react'
 
 export default function SessionsPage() {
     const [isLoading, setIsLoading] = useState(true)
@@ -79,6 +80,11 @@ export default function SessionsPage() {
             default:
                 return <Badge variant="outline">Desconocido</Badge>
         }
+    }
+
+    const copyShareableLink = (id: string) => {
+        navigator.clipboard.writeText(`${window.location.origin}/galeria/${id}`)
+        toast.success('Enlace compartible copiado al portapapeles')
     }
 
     const publishedCount = sessions.filter((s) => s.visible).length
@@ -300,6 +306,11 @@ export default function SessionsPage() {
                                                 Ver Galería
                                             </Button>
                                         </Link>
+
+                                        <Button onClick={() => copyShareableLink(session.id)}>
+                                            <Copy className="mr-2 h-4 w-4" />
+                                            Copiar Enlace
+                                        </Button>
 
                                         <Button
                                             onClick={() => toggleStatus(session.id)}
