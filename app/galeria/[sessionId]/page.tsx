@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Camera, Calendar, User, ArrowLeft } from 'lucide-react'
+import { Camera, Calendar, User, ArrowLeft, Heart } from 'lucide-react'
 import Link from 'next/link'
 
 // Import data
@@ -8,7 +8,6 @@ import siteContent from '@/data/site-content.json'
 import Header from '@/components/header'
 import { getPackages, getPhotoSession } from '@/lib/pocketbase'
 import PhotoGallery from '@/components/photo-gallery'
-import { Heart } from 'lucide-react'
 
 export default async function GaleriaPage({ params }: { params: Promise<{ sessionId: string }> }) {
     // Find the session data
