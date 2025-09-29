@@ -27,22 +27,24 @@ export default function FileUploader() {
         setFileList(fileList.filter((file) => file.id !== id))
     }
 
-    const handleRemoveAllFiles = () => {
-        setFileList([])
-    }
-
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const formData = new FormData(event.currentTarget)
 
-        const response = await postFile<string>({
-            file: formData.get('file') as File,
-            url: '/api/file-upload',
-            onProgress: (progress) => ,
-            onError: (error) => console.error('Upload error:', error)
-        })
+        await Promise.all(
+            fileList.map(async (file) => {
+                file.status = 'uploading'
 
-        console.log('Upload success:', response)
+                const url = await postFile<string>({
+                    file: file.blob,
+                    url: '/api/file-upload',
+                    onProgress: (progress) => {
+                        file.progress = progress
+                        setFileList([...fileList])
+                    }
+                })
+                file.url = url
+            })
+        )
     }
 
     return (

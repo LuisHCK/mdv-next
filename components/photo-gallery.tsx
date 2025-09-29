@@ -7,7 +7,6 @@ import { Card, CardContent } from './ui/card'
 import { Button } from './ui/button'
 import { Download } from 'lucide-react'
 import Link from 'next/link'
-import PhotoGalleryV2 from './photo-gallery-v2'
 
 interface PhotoGalleryProps {
     photoSession: PublishedPhotoSession
@@ -45,8 +44,6 @@ const PhotoGallery = ({ photoSession }: PhotoGalleryProps) => {
                             Galería de Fotos
                         </h2>
                     </div>
-
-                    <PhotoGalleryV2 photos={photos} />
                 </div>
             </section>
 

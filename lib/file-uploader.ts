@@ -5,11 +5,13 @@ interface postFileOptions {
     onProgress?: (percent: number) => void
     onError?: (error: Error) => void
     onSuccess?: () => void
+    pbCollection: unknown
     url: string
 }
 
 export default async function postFile<T>({
     file,
+    pbCollection,
     onProgress,
     onError,
     onSuccess,
@@ -44,6 +46,13 @@ export default async function postFile<T>({
     try {
         request.open('post', url)
         request.timeout = 45000
+
+        // Append pbCollection fields to formdata if it's an object
+        if (pbCollection && typeof pbCollection === 'object') {
+            Object.entries(pbCollection).forEach(([key, value]) => {
+            formdata.append(key, value as any)
+            })
+        }
         request.send(formdata)
 
         return new Promise((resolve, reject) => {

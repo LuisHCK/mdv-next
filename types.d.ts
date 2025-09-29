@@ -290,4 +290,5 @@ export interface FileUpload {
     blob: Blob | File
     progress: number
     status: string
+    url?: string
 }

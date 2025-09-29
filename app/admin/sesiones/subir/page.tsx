@@ -11,6 +11,7 @@ import { getPackageList, uploadNewPhotoSession } from '@/app/actions'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
 import FileUploader from '@/components/admin/file-uploader'
+import postFile from '@/lib/file-uploader'
 
 export default function UploadPage() {
     const [files, setFiles] = useState<UploadedFile[]>([])
@@ -30,11 +31,13 @@ export default function UploadPage() {
 
         if (files.length === 0) {
             toast.error('Por favor selecciona al menos una imagen')
+            setIsSaving(false)
             return
         }
 
         if (!sessionData.client || !sessionData.package_id || !sessionData.phone) {
             toast.error('Por favor completa los campos requeridos')
+            setIsSaving(false)
             return
         }
 
@@ -47,16 +50,40 @@ export default function UploadPage() {
             // files.map(({ file }) => file) // Assuming `file` has a `file` property with the actual file
         )
 
-        const formData = new FormData()
-        formData.append('files', files[0].file)
+        // Sequential (queued) upload to avoid timeouts / overload
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i]
+            try {
+                // eslint-disable-next-line no-await-in-loop
+                const fileUrl = await postFile<string>({
+                    file: file.file,
+                    url: `/api/file-upload`,
+                    onProgress: (progress) => {
+                        console.log(`Upload progress (${i + 1}/${files.length}):`, progress)
+                        // Update file progress in state
+                        setFiles((prevFiles) =>
+                            prevFiles.map((f) =>
+                                f.id === file.id ? { ...f, progress, status: 'uploading' } : f
+                            )
+                        )
+                    }
+                })
 
-        await fetch('/api/file-upload', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            },
-            body: formData
-        })
+                if (fileUrl) {
+                    // update file status
+                    setFiles((prevFiles) =>
+                        prevFiles.map((f) =>
+                            f.id === file.id ? { ...f, progress: 100, status: 'success' } : f
+                        )
+                    )
+                }
+            } catch (err) {
+                console.error('Error uploading file', file.file?.name, err)
+                toast.error(`Error subiendo el archivo: ${file.file?.name || 'desconocido'}`)
+                setIsSaving(false)
+                return
+            }
+        }
 
         if (!newPhotoSession) {
             toast.error('Error al subir la sesión fotográfica. Inténtalo de nuevo.')
@@ -91,8 +118,6 @@ export default function UploadPage() {
         <div className="min-h-screen bg-secondary pb-32">
             <div className="container mx-auto px-4 py-8">
                 <UploadHeader />
-
-                <FileUploader />
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                     <SessionForm

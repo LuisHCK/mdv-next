@@ -29,18 +29,14 @@ export function FileUpload({ files, onFilesChange }: FileUploadProps) {
 
 	const handleFiles = useCallback(
 		(newFiles: File[]) => {
-			const imageFiles = newFiles.filter(file =>
-				file.type.startsWith('image/')
-			)
-
+			const imageFiles = newFiles.filter(file => file.type.startsWith('image/'))
 			const uploadedFiles: UploadedFile[] = imageFiles.map(file => ({
 				id: Math.random().toString(36).slice(2, 11),
 				file,
-				preview: URL.createObjectURL(file),
+				preview: URL.createObjectURL(file), // Full res for now; FilePreview will downscale for display
 				status: 'pending',
 				progress: 0
 			}))
-
 			onFilesChange([...files, ...uploadedFiles])
 		},
 		[files, onFilesChange]
@@ -50,7 +46,6 @@ export function FileUpload({ files, onFilesChange }: FileUploadProps) {
 		(e: React.DragEvent) => {
 			e.preventDefault()
 			setIsDragging(false)
-
 			const droppedFiles = Array.from(e.dataTransfer.files)
 			handleFiles(droppedFiles)
 		},
@@ -67,7 +62,10 @@ export function FileUpload({ files, onFilesChange }: FileUploadProps) {
 	const removeFile = (id: string) => {
 		const fileToRemove = files.find(f => f.id === id)
 		if (fileToRemove) {
-			URL.revokeObjectURL(fileToRemove.preview)
+			// Revoke original object URL (FilePreview may already have generated its own downscaled data URL)
+			if (fileToRemove.preview.startsWith('blob:')) {
+				URL.revokeObjectURL(fileToRemove.preview)
+			}
 		}
 		onFilesChange(files.filter(f => f.id !== id))
 	}
