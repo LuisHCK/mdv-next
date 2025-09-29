@@ -10,6 +10,7 @@ import { UploadHeader } from '@/components/admin/sessions/UploadHeader'
 import { getPackageList, uploadNewPhotoSession } from '@/app/actions'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import FileUploader from '@/components/admin/file-uploader'
 
 export default function UploadPage() {
     const [files, setFiles] = useState<UploadedFile[]>([])
@@ -42,8 +43,20 @@ export default function UploadPage() {
         console.log('Files:', files)
         const newPhotoSession = await uploadNewPhotoSession(
             sessionData,
-            files.map(({ file }) => file) // Assuming `file` has a `file` property with the actual file
+            []
+            // files.map(({ file }) => file) // Assuming `file` has a `file` property with the actual file
         )
+
+        const formData = new FormData()
+        formData.append('files', files[0].file)
+
+        await fetch('/api/file-upload', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            body: formData
+        })
 
         if (!newPhotoSession) {
             toast.error('Error al subir la sesión fotográfica. Inténtalo de nuevo.')
@@ -78,6 +91,8 @@ export default function UploadPage() {
         <div className="min-h-screen bg-secondary pb-32">
             <div className="container mx-auto px-4 py-8">
                 <UploadHeader />
+
+                <FileUploader />
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                     <SessionForm

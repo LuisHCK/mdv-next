@@ -281,3 +281,13 @@ export interface PublishedPhotoSession {
     created: string
     updated: string
 }
+
+export interface FileUpload {
+    id: string
+    filename: string
+    size: number
+    type: string
+    blob: Blob | File
+    progress: number
+    status: string
+}
