@@ -280,6 +280,7 @@ export interface PublishedPhotoSession {
     photos: string[] // Array of photo filenames
     created: string
     updated: string
+    [key: string]: any
 }
 
 export interface FileUpload {

@@ -7,6 +7,7 @@ import { Card, CardContent } from './ui/card'
 import { Button } from './ui/button'
 import { Download } from 'lucide-react'
 import Link from 'next/link'
+import MasonryGallery from './masonry-gallery'
 
 interface PhotoGalleryProps {
     photoSession: PublishedPhotoSession
@@ -45,6 +46,10 @@ const PhotoGallery = ({ photoSession }: PhotoGalleryProps) => {
                         </h2>
                     </div>
                 </div>
+
+                <div className="container mx-auto px-4 lg:px-6 max-w-5xl">
+                    <MasonryGallery photos={photos} onSelect={openLightbox} />
+                </div>  
             </section>
 
             {/* Photo Lightbox */}

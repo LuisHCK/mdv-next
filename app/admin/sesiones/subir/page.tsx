@@ -58,6 +58,7 @@ export default function UploadPage() {
                 const fileUrl = await postFile<string>({
                     file: file.file,
                     url: `/api/file-upload`,
+                    pbCollection: newPhotoSession,
                     onProgress: (progress) => {
                         console.log(`Upload progress (${i + 1}/${files.length}):`, progress)
                         // Update file progress in state
