@@ -121,7 +121,7 @@ export function PhotoLightbox({
 
             {/* Main Image */}
             <div className="flex h-full items-center justify-center p-8 pb-32 pt-8">
-                <div className="relative max-h-full max-w-7xl md:max-w-4xl">
+                <div className="relative max-h-full h-full max-w-7xl md:max-w-4xl">
                     <Image
                         src={currentPhoto || '/placeholder.svg'}
                         alt={currentPhoto}

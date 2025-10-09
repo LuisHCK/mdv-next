@@ -50,7 +50,7 @@ export default async function postFile<T>({
         // Append pbCollection fields to formdata if it's an object
         if (pbCollection && typeof pbCollection === 'object') {
             Object.entries(pbCollection).forEach(([key, value]) => {
-            formdata.append(key, value as any)
+                formdata.append(key, value as any)
             })
         }
         request.send(formdata)

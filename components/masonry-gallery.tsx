@@ -17,7 +17,7 @@ const MasonryGallery = ({ photos, onSelect }: MasonryGalleryProps) => {
     })
 
     return (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 items-start">
+        <div className="grid grid-cols-3 gap-2 md:gap-3 items-start">
             {masonry.map((col, colIdx) => (
                 <div className="grid gap-4" key={colIdx}>
                     {col.map((src, imgIdx) => (

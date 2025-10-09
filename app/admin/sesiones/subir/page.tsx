@@ -1,6 +1,6 @@
 'use client'
 
-import type React from 'react'
+import type { FormEvent } from 'react'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import type { UploadedFile, PublishedPhotoSession, Package } from '@/types'
@@ -10,7 +10,6 @@ import { UploadHeader } from '@/components/admin/sessions/UploadHeader'
 import { getPackageList, uploadNewPhotoSession } from '@/app/actions'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
-import FileUploader from '@/components/admin/file-uploader'
 import postFile from '@/lib/file-uploader'
 
 export default function UploadPage() {
@@ -25,8 +24,8 @@ export default function UploadPage() {
     })
     const router = useRouter()
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
+    const handleSubmit = async (event: FormEvent) => {
+        event.preventDefault()
         setIsSaving(true)
 
         if (files.length === 0) {
