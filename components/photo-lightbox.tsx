@@ -5,6 +5,7 @@ import { X, ChevronLeft, ChevronRight, Download, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Spinner } from './ui/spinner'
 
 interface Photo {
     id: string
@@ -121,7 +122,7 @@ export function PhotoLightbox({
 
             {/* Main Image */}
             <div className="flex h-full items-center justify-center p-8 pb-32 pt-8">
-                <div className="relative max-h-full h-full max-w-7xl md:max-w-4xl">
+                <div className="relative h-full max-h-full max-w-7xl md:max-w-4xl">
                     <Image
                         src={`${currentPhoto}?thumb=1080x0` || '/placeholder.svg'}
                         alt={currentPhoto}
@@ -133,22 +134,7 @@ export function PhotoLightbox({
                     />
                     {isLoading && (
                         <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                            <svg className="animate-spin h-12 w-12 text-white" viewBox="0 0 24 24">
-                                <circle
-                                    className="opacity-25"
-                                    cx="12"
-                                    cy="12"
-                                    r="10"
-                                    stroke="currentColor"
-                                    strokeWidth="4"
-                                    fill="none"
-                                />
-                                <path
-                                    className="opacity-75"
-                                    fill="currentColor"
-                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                                />
-                            </svg>
+                            <Spinner className="h-12 w-12 text-white" />
                         </div>
                     )}
                 </div>
