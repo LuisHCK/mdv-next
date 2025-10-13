@@ -1,12 +1,8 @@
 'use client'
-import React, { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { PhotoLightbox } from './photo-lightbox'
-import Image from 'next/image'
 import { PublishedPhotoSession } from '@/types'
 import { Card, CardContent } from './ui/card'
-import { Button } from './ui/button'
-import { Download } from 'lucide-react'
-import Link from 'next/link'
 import MasonryGallery from './masonry-gallery'
 
 interface PhotoGalleryProps {
@@ -36,7 +32,7 @@ const PhotoGallery = ({ photoSession }: PhotoGalleryProps) => {
     }
 
     return (
-        <React.Fragment>
+        <Fragment>
             {/* Photo Gallery */}
             <section className="py-8">
                 <div className="container mx-auto px-4 lg:px-6">
@@ -81,7 +77,7 @@ const PhotoGallery = ({ photoSession }: PhotoGalleryProps) => {
                     </Card>
                 </div>
             </section>
-        </React.Fragment>
+        </Fragment>
     )
 }
 

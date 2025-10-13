@@ -1,36 +1,56 @@
+'use client'
+import { useIsMobile } from '@/hooks/use-mobile'
 import { cn } from '@/lib/utils'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface MasonryGalleryProps {
     photos: string[]
     onSelect: (index: number) => void
 }
 
-const heights = [1024, 340, 900]
+// Split photos into 3 columns for masonry layout
+const COLUMNS = {
+    DESKTOP: 3,
+    MOBILE: 2
+}
+
+const HEIGHTS = {
+    DESKTOP: ['max-h-[1024px]', 'max-h-[340px]', 'max-h-[900px]'],
+    MOBILE: ['max-h-[300px]', 'max-h-[250px]']
+}
 
 const MasonryGallery = ({ photos, onSelect }: MasonryGalleryProps) => {
-    // Split photos into 4 columns for masonry layout
-    const columns = 3
-    const masonry: string[][] = Array.from({ length: columns }, () => [])
+    const [heights, setHeights] = useState(HEIGHTS.DESKTOP)
+    const isMobile = useIsMobile()
+    const cols = COLUMNS[isMobile ? 'MOBILE' : 'DESKTOP']
+    const masonry: string[][] = Array.from({ length: cols }, () => [])
+
     photos.forEach((photo, idx) => {
-        masonry[idx % columns].push(photo)
+        masonry[idx % cols].push(photo)
     })
 
+    useEffect(() => {
+        setHeights(isMobile ? HEIGHTS.MOBILE : HEIGHTS.DESKTOP)
+    }, [isMobile])
+
     return (
-        <div className="grid grid-cols-3 gap-2 md:gap-3 items-start">
+        <div className={cn('grid grid-cols-2 items-start gap-2 md:grid-cols-3 md:gap-3')}>
             {masonry.map((col, colIdx) => (
                 <div className="grid gap-4" key={colIdx}>
                     {col.map((src, imgIdx) => (
                         <button
                             tabIndex={0}
                             key={imgIdx}
-                            className={cn('overflow-hidden rounded-xl cursor-pointer', `h-[${heights[colIdx]}px]`)}
+                            className={cn(
+                                'cursor-pointer overflow-hidden rounded-xl',
+                                heights[colIdx]
+                            )}
                             onClick={() => onSelect(photos.indexOf(src))}
                         >
                             <img
-                                className="h-full w-full rounded-xl object-cover"
+                                className="h-full w-full rounded-xl object-cover max-h-[300px]U"
                                 src={`${src}?thumb=720x0`}
-                                alt={'Masonry image ' + (colIdx * columns + imgIdx)}
+                                alt={'Masonry image ' + (colIdx * cols + imgIdx)}
                             />
                         </button>
                     ))}
