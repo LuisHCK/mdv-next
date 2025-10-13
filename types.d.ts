@@ -280,4 +280,16 @@ export interface PublishedPhotoSession {
     photos: string[] // Array of photo filenames
     created: string
     updated: string
+    [key: string]: any
+}
+
+export interface FileUpload {
+    id: string
+    filename: string
+    size: number
+    type: string
+    blob: Blob | File
+    progress: number
+    status: string
+    url?: string
 }

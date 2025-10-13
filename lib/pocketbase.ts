@@ -230,3 +230,18 @@ export const deletePhotoSessionHandler = async (id: string, token: string): Prom
         return false
     }
 }
+
+export const addPhotosToSession = async (id: string, files: File[], token: string): Promise<PublishedPhotoSession | null> => {
+    try {
+        pb.authStore.save(token)
+
+        const updatedSession = await pb
+            .collection('sessions')
+            .update<PublishedPhotoSession>(id, { "photos+" : files })
+
+        return updatedSession
+    } catch (error) {
+        console.error('Error adding photos to session:', error)
+        return null
+    }
+}

@@ -13,10 +13,15 @@ const nextConfig = {
         return [
             {
                 source: '/qr',
-                destination: '/',
+                destination: '/?utm_source=qr',
                 permanent: false
             }
         ]
+    },
+    experimental: {
+        serverActions: {
+            bodySizeLimit: '100mb'
+        }
     },
     output: 'standalone'
 }

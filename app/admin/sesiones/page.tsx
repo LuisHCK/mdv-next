@@ -231,7 +231,7 @@ export default function SessionsPage() {
                                                     className="aspect-square overflow-hidden bg-gray-100"
                                                 >
                                                     <img
-                                                        src={thumb || '/placeholder.svg'}
+                                                        src={`${thumb}?thumb=720x0` || '/placeholder.svg'}
                                                         alt={`Preview ${index + 1}`}
                                                         className="h-full w-full object-cover"
                                                     />

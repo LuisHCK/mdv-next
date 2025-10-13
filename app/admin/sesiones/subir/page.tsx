@@ -1,6 +1,6 @@
 'use client'
 
-import type React from 'react'
+import type { FormEvent } from 'react'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import type { UploadedFile, PublishedPhotoSession, Package } from '@/types'
@@ -10,6 +10,7 @@ import { UploadHeader } from '@/components/admin/sessions/UploadHeader'
 import { getPackageList, uploadNewPhotoSession } from '@/app/actions'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import postFile from '@/lib/file-uploader'
 
 export default function UploadPage() {
     const [files, setFiles] = useState<UploadedFile[]>([])
@@ -23,17 +24,19 @@ export default function UploadPage() {
     })
     const router = useRouter()
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
+    const handleSubmit = async (event: FormEvent) => {
+        event.preventDefault()
         setIsSaving(true)
 
         if (files.length === 0) {
             toast.error('Por favor selecciona al menos una imagen')
+            setIsSaving(false)
             return
         }
 
         if (!sessionData.client || !sessionData.package_id || !sessionData.phone) {
             toast.error('Por favor completa los campos requeridos')
+            setIsSaving(false)
             return
         }
 
@@ -42,8 +45,45 @@ export default function UploadPage() {
         console.log('Files:', files)
         const newPhotoSession = await uploadNewPhotoSession(
             sessionData,
-            files.map(({ file }) => file) // Assuming `file` has a `file` property with the actual file
+            []
+            // files.map(({ file }) => file) // Assuming `file` has a `file` property with the actual file
         )
+
+        // Sequential (queued) upload to avoid timeouts / overload
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i]
+            try {
+                // eslint-disable-next-line no-await-in-loop
+                const fileUrl = await postFile<string>({
+                    file: file.file,
+                    url: `/api/file-upload`,
+                    pbCollection: newPhotoSession,
+                    onProgress: (progress) => {
+                        console.log(`Upload progress (${i + 1}/${files.length}):`, progress)
+                        // Update file progress in state
+                        setFiles((prevFiles) =>
+                            prevFiles.map((f) =>
+                                f.id === file.id ? { ...f, progress, status: 'uploading' } : f
+                            )
+                        )
+                    }
+                })
+
+                if (fileUrl) {
+                    // update file status
+                    setFiles((prevFiles) =>
+                        prevFiles.map((f) =>
+                            f.id === file.id ? { ...f, progress: 100, status: 'success' } : f
+                        )
+                    )
+                }
+            } catch (err) {
+                console.error('Error uploading file', file.file?.name, err)
+                toast.error(`Error subiendo el archivo: ${file.file?.name || 'desconocido'}`)
+                setIsSaving(false)
+                return
+            }
+        }
 
         if (!newPhotoSession) {
             toast.error('Error al subir la sesión fotográfica. Inténtalo de nuevo.')
