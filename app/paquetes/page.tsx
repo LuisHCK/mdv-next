@@ -120,7 +120,7 @@ export default async function PaquetesPage() {
                 <div className="py-16">
                     {packages.map((packageData, packageIndex) => (
                         <section
-                            key={packageIndex}
+                            key={`package-${packageData.id}`}
                             className={packageIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50'}
                         >
                             <div className="container mx-auto px-4 lg:px-6 py-16">
@@ -129,12 +129,6 @@ export default async function PaquetesPage() {
                                     <div
                                         className={`w-16 h-16 bg-brand-primary flex items-center justify-center mx-auto mb-6`}
                                     >
-                                        {React.createElement(
-                                            iconMap[packageData.icon as keyof typeof iconMap],
-                                            {
-                                                className: 'h-8 w-8 text-white'
-                                            }
-                                        )}
                                     </div>
                                     <h2 className="text-3xl md:text-4xl font-serif font-bold text-brand-dark mb-4">
                                         {packageData.name}

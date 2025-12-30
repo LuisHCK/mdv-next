@@ -7,10 +7,15 @@ export interface PackageTier {
     price: string
     duration: string
     photos: string
-    features: string[]
+    features: PackageFeature[]
     delivery: string
     popular: boolean
     package_id: string // Reference to the package this tier belongs to
+}
+
+export interface PackageFeature {
+    feature: string
+    id: number
 }
 
 export interface Package {

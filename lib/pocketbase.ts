@@ -30,14 +30,12 @@ export const getTiers = async (): Promise<PackageTier[]> => {
  */
 export const getPackages = async (): Promise<Package[]> => {
     try {
-        const response = await pb.collection<Package>('packages').getFullList()
-        const tiers = await getTiers()
-
-        // Map each package to include its tier information
-        return response.map((pkg) => ({
-            ...pkg,
-            tiers: tiers.filter((tier) => tier.package_id === pkg.id)
-        }))
+        const response = await fetch('https://cms.memoriasdevidafoto.com/api/packages?depth=1')
+        if (!response.ok) {
+            throw new Error('Network response was not ok')
+        }
+        const { docs } = await response.json()
+        return docs
     } catch (error) {
         console.error('Error fetching packages:', error)
         throw error
@@ -231,13 +229,17 @@ export const deletePhotoSessionHandler = async (id: string, token: string): Prom
     }
 }
 
-export const addPhotosToSession = async (id: string, files: File[], token: string): Promise<PublishedPhotoSession | null> => {
+export const addPhotosToSession = async (
+    id: string,
+    files: File[],
+    token: string
+): Promise<PublishedPhotoSession | null> => {
     try {
         pb.authStore.save(token)
 
         const updatedSession = await pb
             .collection('sessions')
-            .update<PublishedPhotoSession>(id, { "photos+" : files })
+            .update<PublishedPhotoSession>(id, { 'photos+': files })
 
         return updatedSession
     } catch (error) {
